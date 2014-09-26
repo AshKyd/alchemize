@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"><!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>Alchemize</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand">Alchemize</span>
+                </div>
+
+                <div class="nav navbar-nav navbar-right">
+                    <select class="form-control formats">
+                    </select>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default action compress" data-action="compress">Compress</button>
+                        <button type="button" class="btn btn-default action prettify" data-action="prettify">Prettify</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="editor"></div>
+
+        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+            <div class="container">
+                <div class="nav navbar-nav navbar-right">
+                </div>
+            </div>
+        </nav>
+        <!-- What a shithouse API -->
+        <iframe id="if" src="sandbox.html" style="display:none"></iframe>
+        <script src="index.js"></script>
+    </body>
+</html>
+
