@@ -109,8 +109,10 @@ function dragSingle(file){
     var reader = new FileReader();
 
     reader.onload = function (event) {
-        var isBinary = /[\u0000-\u0009]/.test(event.target.result);
+        // Uglify occasionally inserts \x01 for some reason.
+        var isBinary = /[\x00\x02-\x08\x0E-\x1F]/.test(event.target.result);
         if(isBinary){
+            window.bin = event.target.result;
             message('Binary file detected. Loading as base64.');
             reader.readAsDataURL(file);
         } else {

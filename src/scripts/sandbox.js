@@ -85,10 +85,7 @@ var langs = {
     },
     xml: {
         compress: function(opts, cb){
-            // Also minimise space between attributes if they're on newlines etc.
-            var ugly = prettydata.pd.xmlmin(opts.input.replace(/\>[\s\n]+\</g,'><').replace(/\<([^>]+)\>/g,function(a){
-                return a.replace(/\n/g,' ').replace(/\s+/g,' ');
-            }));
+            var ugly = prettydata.pd.xmlmin(opts.input);
             cb({
                 output: ugly
             });
