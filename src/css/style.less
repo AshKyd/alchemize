@@ -1,9 +1,10 @@
-@import '../../node_modules/bootstrap/less/bootstrap.less';
+@import './bootstrap.less';
 
 .formats{
 	display:inline-block;
 	width:10em;
 	margin-bottom:-10px;
+	height:32px;
 }
 .navbar-right{
 	margin:7.5px 0 !important;
@@ -11,4 +12,39 @@
 
 .navbar{
 	margin:0;
+	.btn{ // Screw with the sizes to match the .formats select.
+		height:32px;
+		padding: 5px 12px 7px;
+	}
+}
+
+.status{
+	display:inline-block;
+	line-height:50px;
+}
+
+.status.format:after{
+	content:" - "
+}
+
+// Dumb Bootstrap responsive stuff.
+.collapsed{
+	display:none;
+}
+
+
+// Ace search box tweaks.
+body{
+	.ace_search_field{
+		width:200px;
+	}
+	.ace_search{
+		background:#f8f8f8;
+		border-color:#e7e7e7;
+	}
+
+	.ace_replacebtn{
+		padding: 0 6px 0 7px;
+		font-family: sans-serif;
+	}
 }

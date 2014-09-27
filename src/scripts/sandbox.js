@@ -8,9 +8,17 @@ var prettydata = require('pretty-data');
 var langs = {
     js: {
         compress: function(opts, cb){
-        var ugly = UglifyJS.minify(opts.input, {
-                fromString: true
-            });
+            try{
+                var ugly = UglifyJS.minify(opts.input, {
+                    fromString: true
+                });
+            } catch(e){
+                console.log(e);
+                return cb({
+                    output:opts.input,
+                    error: 'Error parsing: '+e.message+'. Line '+e.line+', col '+e.col
+                });
+            }
 
             cb({
                 output: ugly.code
@@ -25,16 +33,20 @@ var langs = {
     },
     json: {
         compress: function(opts, cb){
-            var ugly = JSON.stringify(JSON.parse(opts.input));
+            try{
+                var ugly = JSON.stringify(JSON.parse(opts.input));
+            } catch(e){
+                return cb({
+                    output:opts.input,
+                    error: 'Error parsing: '+e.message
+                });
+            }
             cb({
                 output: ugly
             });
         },
-        prettify: function(opts, cb){
-            var pretty = JSON.stringify(JSON.parse(opts.input),null,4);
-            cb({
-                output: pretty
-            })
+        prettify: function(opts,cb){
+            langs.js.prettify(opts,cb);
         }
     },
     html: {
@@ -73,12 +85,23 @@ var langs = {
     },
     xml: {
         compress: function(opts, cb){
-            var ugly = prettydata.pd.xmlmin(opts.input);
+            // Also minimise space between attributes if they're on newlines etc.
+            var ugly = prettydata.pd.xmlmin(opts.input.replace(/\>[\s\n]+\</g,'><').replace(/\<([^>]+)\>/g,function(a){
+                return a.replace(/\n/g,' ').replace(/\s+/g,' ');
+            }));
             cb({
                 output: ugly
             });
         },
         prettify: function(opts, cb){
+            // Prettydata is a but stupid, we can't configure this so
+            // clobber it instead.
+            var shift = ['\n'];
+            for(var ix=0;ix<100;ix++){
+                shift.push(shift[ix]+'    '); 
+            }
+            prettydata.pd.shift = shift;
+
             var pretty = prettydata.pd.xml(opts.input,opts);
             cb({
                 output: pretty
