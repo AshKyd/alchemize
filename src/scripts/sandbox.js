@@ -66,7 +66,7 @@ var langs = {
             var pretty = beautify.html_beautify(opts.input,opts);
             cb({
                 output: pretty
-            })
+            });
         }
     },
     css: {
@@ -94,15 +94,11 @@ var langs = {
             });
         },
         prettify: function(opts, cb){
-            // Prettydata is a but stupid, we can't configure this so
-            // clobber it instead.
-            var shift = ['\n'];
-            for(var ix=0;ix<100;ix++){
-                shift.push(shift[ix]+'    '); 
-            }
-            prettydata.pd.shift = shift;
+            var pp = new prettydata.pp({
+                step:4
+            });
 
-            var pretty = prettydata.pd.xml(opts.input,opts);
+            var pretty = pp.xml(opts.input,opts);
             cb({
                 output: pretty
             })
