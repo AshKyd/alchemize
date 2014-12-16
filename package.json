@@ -12,9 +12,11 @@
     "bootstrap": "^3.2.0",
     "brace": "^0.3.0",
     "clean-css": "^2.2.16",
-    "html-minifier": "^0.6.8",
+    "gulp-browserify": "^0.5.0",
+    "html-minifier": "^0.6.9",
     "jquery": "^2.1.1",
     "js-beautify": "^1.5.1",
+    "pretty-data": "^0.40.0",
     "uglify-js": "^2.4.15"
   },
   "devDependencies": {
