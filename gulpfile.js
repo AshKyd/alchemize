@@ -6,6 +6,7 @@ var zip = require('gulp-zip');
 var through = require('through');
 var fs = require('fs');
 var less = require('gulp-less');
+var rsync = require('gulp-rsync');
 
 gulp.task('js', function() {
     gulp.src([
@@ -53,9 +54,20 @@ gulp.task('chrome-dist',function(){
         .pipe(gulp.dest('./'))
 });
 
+gulp.task('web-dist',function(){
+    gulp.src(['dist/**']).pipe(rsync({
+        root: 'dist',
+        hostname: 'direct.ash.ms',
+        destination: '/var/www/alchemizeapp.com/public_html/app/'
+    }));
+});
+
+
+
 gulp.task('watch', function () {
     gulp.watch(['src/index.html','src/**/*'], ['build']);
 });
 
 gulp.task('build',['js','css','html','chrome-dev','chrome-dist']);
+gulp.task('deploy',['build','web-dist']);
 gulp.task('default',['build','connect','watch']);

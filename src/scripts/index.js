@@ -93,7 +93,7 @@ function performAction(){
 
 function initDrag(){
     var holder = document.getElementsByTagName('body')[0];
-    
+
     holder.ondragover = function () { this.className = 'hover'; return false; };
     holder.ondragend = function () { this.className = ''; return false; };
     holder.ondrop = function (e) {
@@ -121,7 +121,7 @@ function dragSingle(file){
             editor.setValue(event.target.result);
         }
     };
-    
+
     reader.readAsText(file);
 }
 
@@ -178,7 +178,7 @@ function detectContentTypeFromContent(content){
         {
             test : /\w+\s*\{/,
             type : 'CSS'
-            
+
         },
         // Matches assignment, excluding something like the CSS syntax [foo=bar]
         // False positive on something like @import("/foo?a=b")
@@ -186,19 +186,19 @@ function detectContentTypeFromContent(content){
             test : /\s[^'"\[]+\=/,
             type : 'JavaScript'
         }
-        
+
     ];
-    
+
     for(var i=0; i<round1.length; i++){
         if(content.match(round1[i].test)){
             return round1[i].type;
         }
     }
-    
+
     return false;
-    
+
 }
-    
+
 function bytesToDisplay(bytes,units){
     return Math.round((bytes)/10.24)/100 + (units ? ' KB' : '');
 }
@@ -224,7 +224,7 @@ $(document).ready(function(){
             detectContentType('',editor.getValue());
         });
     });
-    
+
     editor.on('change',function(content){
         $('.status.format').text($('.formats').val());
         message(bytesToDisplay(editor.getValue().length,true));
