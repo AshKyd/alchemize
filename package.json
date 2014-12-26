@@ -1,6 +1,6 @@
 {
   "name": "alchemize",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Mimify & pretty print source code with ease.",
   "main": "src/scripts/index.js",
   "scripts": {
