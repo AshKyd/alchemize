@@ -8,6 +8,21 @@ var fs = require('fs');
 var less = require('gulp-less');
 var rsync = require('gulp-rsync');
 
+var config = {};
+try{
+    config = require('./config');
+} catch(e){
+    console.error('config not found');
+    // Sample config
+    // module.exports = {
+    //     rsync: {
+    //         root: 'dist',
+    //         hostname: 'my.host',
+    //         destination: '/var/ww/whatever'
+    //     }
+    // }
+}
+
 gulp.task('js', function() {
     gulp.src([
         'src/scripts/index.js',
@@ -54,15 +69,11 @@ gulp.task('chrome-dist',function(){
         .pipe(gulp.dest('./'))
 });
 
-gulp.task('web-dist',function(){
-    gulp.src(['dist/**']).pipe(rsync({
-        root: 'dist',
-        hostname: 'direct.ash.ms',
-        destination: '/var/www/alchemizeapp.com/public_html/app/'
-    }));
-});
-
-
+if(config.rsync){
+    gulp.task('web-dist',function(){
+        gulp.src(['dist/**']).pipe(rsync(config.rsync));
+    });
+}
 
 gulp.task('watch', function () {
     gulp.watch(['src/index.html','src/**/*'], ['build']);
