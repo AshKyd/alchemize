@@ -1,5 +1,5 @@
 chrome.zip
-chrome
+/chrome
 dist
 node_modules
 config.js

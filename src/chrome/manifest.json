@@ -1,0 +1,21 @@
+{
+   "app": {
+      "background": {
+         "scripts": [ "background.js" ]
+      }
+   },
+   "description": "Minify & pretty-print source code with ease.",
+   "icons": {
+      "128": "icons/alchemize-128.png",
+      "16": "icons/alchemize-16.png",
+      "256": "icons/alchemize-256.png",
+      "48": "icons/alchemize-48.png",
+      "96": "icons/alchemize-96.png"
+   },
+   "manifest_version": 2,
+   "name": "Alchemize",
+   "sandbox": {
+      "pages": [ "sandbox.html" ]
+   },
+   "version": "2.0.3"
+}
