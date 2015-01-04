@@ -1,11 +1,11 @@
 {
   "name": "alchemize",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Mimify & pretty print source code with ease.",
   "main": "src/scripts/index.js",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/AshKyd/alchemize"
+    "type": "git",
+    "url": "https://github.com/AshKyd/alchemize"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
