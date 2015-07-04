@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
 var connect = require('gulp-connect');
 var zip = require('gulp-zip');
@@ -7,6 +6,7 @@ var through = require('through');
 var fs = require('fs');
 var less = require('gulp-less');
 var rsync = require('gulp-rsync');
+var browserify = require('browserify');
 
 var config = {};
 try{
@@ -23,17 +23,30 @@ try{
     // }
 }
 
-gulp.task('js', function() {
-    gulp.src([
-        'src/scripts/index.js',
-        'src/scripts/sandbox.js',
-        ])
-        .pipe(browserify({
-          debug : false
-        }))
-        // .pipe(uglify())
-        .pipe(gulp.dest('dist/'));
+function browserifyTask(src, dest){
+    var b = browserify({
+        entries: src
+    });
+    return b.bundle()
+        // .pipe(through(function(data){
+        //     if(data.indexOf('no window object present')){
+        //         data = data.replace('')
+        //     }
+        // }))
+        .pipe(fs.createWriteStream(dest));
+}
+
+gulp.task('js-index', function() {
+    return browserifyTask('./src/scripts/index.js', 'dist/index.js');
 });
+gulp.task('js-sandbox', function() {
+    return browserifyTask('./src/scripts/sandbox.js', 'dist/sandbox.js');
+});
+gulp.task('js-worker', function() {
+    return browserifyTask('./src/scripts/worker.js', 'dist/worker.js');
+});
+
+gulp.task('js', ['js-index', 'js-sandbox', 'js-worker']);
 
 gulp.task('html', function(){
     gulp.src('src/*.html')
@@ -58,7 +71,7 @@ gulp.task('chrome-dev',function(){
         'src/chrome/**',
         'dist/**'
         ])
-        .pipe(gulp.dest('chrome/'))
+        .pipe(gulp.dest('chrome/'));
 });
 
 gulp.task('chrome-dist',function(){
@@ -66,7 +79,7 @@ gulp.task('chrome-dist',function(){
         'chrome/**',
         ])
         .pipe(zip('chrome.zip'))
-        .pipe(gulp.dest('./'))
+        .pipe(gulp.dest('./'));
 });
 
 if(config.rsync){

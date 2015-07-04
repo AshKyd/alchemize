@@ -1,8 +1,8 @@
 // Globals and general ugliness.
-var $ = require('jquery');
+window.$ = require('jquery');
 window.jQuery = $;
 require('../../node_modules/bootstrap/dist/js/bootstrap.min.js');
-
+var versioning = require('./_includes/versioning');
 // Ace editor
 var ace = require('brace');
 require('brace/mode/text');
@@ -237,6 +237,8 @@ $(document).ready(function(){
     $('button.action').click(performAction);
     initDrag();
 
+    versioning();
+
 });
 
 $(window).resize(function(){
@@ -251,12 +253,16 @@ $(window).focus(function(){
 });
 
 
-function postMessage(message){
-    var i = document.getElementById('if');
-    i.contentWindow.postMessage(message, '*');
+function postMessage(payload){
+    document.getElementById('if').contentWindow.postMessage(payload, '*');
+    $('.progress').fadeIn(25);
+    $('button, select').attr('disabled', 'disabled');
+    message(payload.direction+'ing…');
 }
 
 window.addEventListener('message', function(event) {
+    $('.progress').fadeOut(25);
+    $('button, select').removeAttr('disabled');
     var output = event.data.response.output;
     var error = event.data.response.error;
     editor.setValue(output);

@@ -10,6 +10,18 @@
 	margin:7.5px 0 !important;
 }
 
+.navbar-fixed-bottom .navbar-right{
+	width:50%;
+	.progress{
+		width:100%;
+		display:none;
+		margin: 8px 0 0 0;
+		.progress-bar{
+			width:100%;
+		}
+	}
+}
+
 .navbar{
 	margin:0;
 	.btn{ // Screw with the sizes to match the .formats select.
@@ -47,4 +59,22 @@ body{
 		padding: 0 6px 0 7px;
 		font-family: sans-serif;
 	}
+}
+
+// Override the disabled state.
+button,
+select,
+[data-toggle]{
+	cursor:pointer !important;
+}
+
+
+.modal .addendum{
+	font-weight: normal;
+	color:#444;
+}
+.modal .btn{
+	display:block;
+	margin:0 auto 10px;
+	max-width:66%;
 }
