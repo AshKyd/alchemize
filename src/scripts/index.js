@@ -3,8 +3,6 @@ var $ = require('jquery');
 window.jQuery = $;
 require('../../node_modules/bootstrap/dist/js/bootstrap.min.js');
 
-// note: html-minifier needs to have './htmlparser' replaced with 'htmlparser'
-
 // Ace editor
 var ace = require('brace');
 require('brace/mode/text');
