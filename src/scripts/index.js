@@ -1,4 +1,3 @@
-console.log('hello world');
 // Globals and general ugliness.
 window.$ = require('jquery');
 window.jQuery = $;
@@ -248,7 +247,6 @@ function postMessage(payload){
 }
 
 function onmessage(event) {
-    console.log(event);
     $('.progress').fadeOut(25);
     $('button, select').removeAttr('disabled');
     var output = event.data.response.output;
