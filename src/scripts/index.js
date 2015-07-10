@@ -1,8 +1,8 @@
 // Globals and general ugliness.
-var $ = require('jquery');
+window.$ = require('jquery');
 window.jQuery = $;
 require('../../node_modules/bootstrap/dist/js/bootstrap.min.js');
-
+var versioning = require('./_includes/versioning');
 // Ace editor
 var ace = require('brace');
 require('brace/mode/text');
@@ -205,7 +205,70 @@ function message(msg){
     $('.status.message').text(msg);
 }
 
+
+var $frame;
+function initFrame(){
+    $frame = $('<iframe></iframe>')
+        .attr({
+             id: "if",
+             src: "sandbox.html",
+             style: "display:none",
+             'child-src': 'chrome-extension://kmkncknehdjjpkcoadfhplbhngpeinek/worker.js'
+        });
+    $('body').append($frame);
+    window.addEventListener('message', onmessage);
+}
+
+var worker;
+function initWorker(){
+    // If we don't have workers for whatever reason, fire up a frame.
+    if(typeof Worker !== 'function'){
+        return initFrame();
+    }
+    worker = new Worker('worker.js');
+    worker.onmessage = onmessage;
+}
+
+
+function postMessage(payload){
+    // If our frame is initialised we're probably using a Chrome extension
+    if($frame){
+        $frame[0].contentWindow.postMessage(payload, '*');
+    }
+
+    // If we've got a worker, use that! these should be mutually exclusive.
+    if(worker){
+        worker.postMessage(payload);
+    }
+
+    $('.progress').fadeIn(25);
+    $('button, select').attr('disabled', 'disabled');
+    message(payload.direction+'ing…');
+}
+
+function onmessage(event) {
+    $('.progress').fadeOut(25);
+    $('button, select').removeAttr('disabled');
+    var output = event.data.response.output;
+    var error = event.data.response.error;
+    editor.setValue(output);
+    if(error){
+        message(error);
+    } else {
+        message('New size: '+bytesToDisplay(output.length,true)+
+            ', saving '+bytesToDisplay(before - output.length,true));
+    }
+}
+
 $(document).ready(function(){
+    // Chrome can't doooo workers in a sandbox.
+    // Or at least I can't work out how.
+    // https://plus.google.com/+AshKyd/posts/MhRH3BrE4NR
+    if(window.location.protocol === "chrome-extension:"){
+        initFrame();
+    } else {
+        initWorker();
+    }
     $(window).resize();
     editor = ace.edit('editor');
     editor.setTheme('ace/theme/chrome');
@@ -237,6 +300,8 @@ $(document).ready(function(){
     $('button.action').click(performAction);
     initDrag();
 
+    versioning();
+
 });
 
 $(window).resize(function(){
@@ -248,22 +313,4 @@ $(window).resize(function(){
 
 $(window).focus(function(){
     editor.focus();
-});
-
-
-function postMessage(message){
-    var i = document.getElementById('if');
-    i.contentWindow.postMessage(message, '*');
-}
-
-window.addEventListener('message', function(event) {
-    var output = event.data.response.output;
-    var error = event.data.response.error;
-    editor.setValue(output);
-    if(error){
-        message(error);
-    } else {
-        message('New size: '+bytesToDisplay(output.length,true)+
-            ', saving '+bytesToDisplay(before - output.length,true));
-    }
 });

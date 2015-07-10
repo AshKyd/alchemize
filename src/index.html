@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Alchemize</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
-        <nav class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <span class="navbar-brand">Alchemize</span>
-                </div>
 
-                <div class="nav navbar-nav navbar-right">
-                    <select class="form-control formats">
-                    </select>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default action compress" data-action="compress">Compress</button>
-                        <button type="button" class="btn btn-default action prettify" data-action="prettify">Prettify</button>
+<head>
+    <meta charset="utf-8">
+    <title>Alchemize</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="style.css"> </head>
+    <script src="index.js" defer></script>
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <span class="navbar-brand"  data-toggle="modal" data-target="#about">Alchemize</span>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <select class="form-control formats"> </select>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default action compress" data-action="compress">Compress</button>
+                    <button type="button" class="btn btn-default action prettify" data-action="prettify">Prettify</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="editor"></div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <div class="container-fluid">
+            <div class="nav navbar-nav navbar-left">
+                <div class="status format">Text</div>
+                <div class="status message">Drag or paste a file.</div>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-info active">
+                        <span class="sr-only">Working</span>
                     </div>
                 </div>
             </div>
-        </nav>
-
-        <div id="editor"></div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-    <div class="container-fluid">
-        <div class="nav navbar-nav navbar-left">
-        <div class="status format">Text</div>
-        <div class="status message">Drag or paste a file.</div>
         </div>
-        <div class="nav navbar-nav navbar-right">
-        </div>
-    </div>
-</nav>
-        <!-- What a shithouse API -->
-        <iframe id="if" src="sandbox.html" style="display:none"></iframe>
-        <script src="index.js"></script>
-    </body>
+    </nav>
+<div class="modal fade" id="about">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Alchemize App <span class="addendum">v<span class="version"></span></span></h4>
+      </div>
+      <div class="modal-body">
+          <p>Copyright &copy; 2015 Ash Kyd. Alchemize is made possible by open source projects.</p>
+          <a class="btn btn-default btn-lg" target="_blank" href="https://alchemizeapp.com/">Website</a>
+          <table id="software-table" class="table">
+              <thead class="sr-only"><th>Package</th><th>Version</th></thead>
+          </table>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+
 </html>
-
