@@ -123,7 +123,15 @@ addEventListener('message', function(e) {
 });
 
 function reply(event, resp){
-    postMessage({
-        response: resp
-    });
+    // If we're in a window, assume we're in a frame, and postmessage.
+    if(typeof window !== 'undefined' && window.parent){
+        window.parent.postMessage({
+            response:resp
+        }, '*');
+    } else {
+        // otherwise use the Worker native postmessage
+        postMessage({
+            response: resp
+        });
+    }
 }

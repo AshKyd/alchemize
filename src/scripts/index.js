@@ -1,3 +1,4 @@
+console.log('hello world');
 // Globals and general ugliness.
 window.$ = require('jquery');
 window.jQuery = $;
@@ -205,7 +206,71 @@ function message(msg){
     $('.status.message').text(msg);
 }
 
+
+var $frame;
+function initFrame(){
+    $frame = $('<iframe></iframe>')
+        .attr({
+             id: "if",
+             src: "sandbox.html",
+             style: "display:none",
+             'child-src': 'chrome-extension://kmkncknehdjjpkcoadfhplbhngpeinek/worker.js'
+        });
+    $('body').append($frame);
+    window.addEventListener('message', onmessage);
+}
+
+var worker;
+function initWorker(){
+    // If we don't have workers for whatever reason, fire up a frame.
+    if(typeof Worker !== 'function'){
+        return initFrame();
+    }
+    worker = new Worker('worker.js');
+    worker.onmessage = onmessage;
+}
+
+
+function postMessage(payload){
+    // If our frame is initialised we're probably using a Chrome extension
+    if($frame){
+        $frame[0].contentWindow.postMessage(payload, '*');
+    }
+
+    // If we've got a worker, use that! these should be mutually exclusive.
+    if(worker){
+        worker.postMessage(payload);
+    }
+
+    $('.progress').fadeIn(25);
+    $('button, select').attr('disabled', 'disabled');
+    message(payload.direction+'ing…');
+}
+
+function onmessage(event) {
+    console.log(event);
+    $('.progress').fadeOut(25);
+    $('button, select').removeAttr('disabled');
+    var output = event.data.response.output;
+    var error = event.data.response.error;
+    editor.setValue(output);
+    if(error){
+        message(error);
+    } else {
+        message('New size: '+bytesToDisplay(output.length,true)+
+            ', saving '+bytesToDisplay(before - output.length,true));
+    }
+}
+
 $(document).ready(function(){
+    // Chrome can't doooo workers in a sandbox.
+    // Or at least I can't work out how.
+    // https://plus.google.com/+AshKyd/posts/MhRH3BrE4NR
+    if(window.location.protocol === "chrome-extension:"){
+        initFrame();
+    } else {
+        initWorker();
+    }
     $(window).resize();
     editor = ace.edit('editor');
     editor.setTheme('ace/theme/chrome');
@@ -250,26 +315,4 @@ $(window).resize(function(){
 
 $(window).focus(function(){
     editor.focus();
-});
-
-
-function postMessage(payload){
-    document.getElementById('if').contentWindow.postMessage(payload, '*');
-    $('.progress').fadeIn(25);
-    $('button, select').attr('disabled', 'disabled');
-    message(payload.direction+'ing…');
-}
-
-window.addEventListener('message', function(event) {
-    $('.progress').fadeOut(25);
-    $('button, select').removeAttr('disabled');
-    var output = event.data.response.output;
-    var error = event.data.response.error;
-    editor.setValue(output);
-    if(error){
-        message(error);
-    } else {
-        message('New size: '+bytesToDisplay(output.length,true)+
-            ', saving '+bytesToDisplay(before - output.length,true));
-    }
 });

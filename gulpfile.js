@@ -66,7 +66,7 @@ gulp.task('connect',function(){
     });
 });
 
-gulp.task('chrome-dev',function(){
+gulp.task('chrome-dev', ['js'], function(){
     gulp.src([
         'src/chrome/**',
         'dist/**'
@@ -74,7 +74,7 @@ gulp.task('chrome-dev',function(){
         .pipe(gulp.dest('chrome/'));
 });
 
-gulp.task('chrome-dist',function(){
+gulp.task('chrome-dist', ['chrome-dev'], function(){
     gulp.src([
         'chrome/**',
         ])
