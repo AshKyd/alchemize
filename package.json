@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-js": "browserify src/scripts/index.js>dist/index.js & browserify src/scripts/worker.js>dist/worker.js & browserify src/scripts/workerService > dist/workerService.js",
     "build-css": "lessc src/css/style.less > dist/style.css",
-    "build-misc": "cp src/*.html src/*.webapp dist/",
+    "build-misc": "cp src/*.html src/*.json dist/",
     "build-icons": "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
     "clean": "rm -rf dist;mkdir -p dist/icons/;",
     "build": "npm run clean; npm run build-js & npm run build-css & npm run build-misc & npm run build-icons;wait"
