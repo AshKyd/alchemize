@@ -1,3 +1,9 @@
+try{
+  navigator.serviceWorker.register('workerService.js');
+}catch(e){
+  console.error(e);
+}
+
 // Globals and general ugliness.
 window.$ = require('jquery');
 window.jQuery = $;
