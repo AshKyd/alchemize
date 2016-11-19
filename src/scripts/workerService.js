@@ -1,6 +1,6 @@
 var toolbox = require('sw-toolbox');
 toolbox.options.debug = true;
-toolbox.router.default = toolbox.networkFirst;
+toolbox.router.default = toolbox.fastest;
 
 // Boilerplate to ensure our service worker takes control of the page as soon
 // as possible.
