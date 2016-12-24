@@ -13,8 +13,9 @@
     "build-css": "lessc src/css/style.less > dist/style.css",
     "build-misc": "cp src/*.html src/*.json dist/",
     "build-icons": "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
-    "clean": "rm -rf dist;mkdir -p dist/icons/;",
-    "build": "npm run clean; npm run build-js & npm run build-css & npm run build-misc & npm run build-icons;wait"
+    "clean": "rm -rf dist dist-www;mkdir -p dist/icons/;mkdir dist-www",
+    "build": "npm run clean; npm run build-js & npm run build-css & npm run build-misc & npm run build-icons;wait",
+    "build-web": "npm run build;cp web/* dist-www/;cp dist dist-www/app -r"
   },
   "author": "Ash Kyd <ash@kyd.com.au>",
   "license": "ISC",
