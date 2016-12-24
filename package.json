@@ -21,13 +21,13 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.2.0",
-    "brace": "git+ssh://git@github.com:AshKyd/brace.git",
+    "brace": "git+https://github.com/AshKyd/brace.git",
     "clean-css": "^2.2.16",
     "gulp-rsync": "0.0.5",
-    "html-minifier": "git+ssh://git@github.com:AshKyd/html-minifier.git#gh-pages",
+    "html-minifier": "git+https://github.com/AshKyd/html-minifier.git",
     "jquery": "^2.1.1",
     "js-beautify": "^1.5.1",
-    "pretty-data": "git+ssh://git@github.com:AshKyd/pretty-data.git",
+    "pretty-data": "git+https://github.com/AshKyd/pretty-data.git",
     "sw-toolbox": "^3.4.0",
     "uglify-js": "^2.4.15"
   }
