@@ -1,5 +1,6 @@
 chrome.zip
 /chrome
 dist
+dist-www
 node_modules
 config.js
