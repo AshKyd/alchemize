@@ -9,8 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-js": "node node_modules/browserify/bin/cmd.js src/scripts/index.js>dist/index.js & node node_modules/browserify/bin/cmd.js src/scripts/worker.js>dist/worker.js & node node_modules/browserify/bin/cmd.js src/scripts/workerService > dist/workerService.js",
-    "build-css": "node_modules/less/bin/lessc src/css/style.less > dist/style.css",
+    "build-js": "browserify src/scripts/index.js>dist/index.js & browserify src/scripts/worker.js>dist/worker.js & browserify src/scripts/workerService > dist/workerService.js",
+    "build-css": "lessc src/css/style.less > dist/style.css",
     "build-misc": "cp src/*.html src/*.json dist/",
     "build-icons": "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
     "clean": "rm -rf dist dist-www;mkdir -p dist/icons/;mkdir dist-www",
@@ -30,5 +30,9 @@
     "pretty-data": "git+https://github.com/AshKyd/pretty-data.git",
     "sw-toolbox": "^3.4.0",
     "uglify-js": "^2.4.15"
+  },
+  "devDependencies": {
+    "browserify": "^13.3.0",
+    "less": "^2.7.2"
   }
 }
