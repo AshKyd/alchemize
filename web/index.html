@@ -1,85 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset='utf-8'>
     <title>Alchemize App</title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.css">
-    <style type="text/css">
-      .container-fluid{
-        max-width:800px;
-        padding-top:10px;
-      }
-      .ratio-169{
-        position:relative;
-        width:100%;
-        padding-bottom:56.25%;
-      }
-      .ratio-169 iframe{
-        position:absolute;
-        display:block;
-        left:0;
-        top:0;
-        width:100%;
-        height:100%;
-      }
-      footer{
-        margin-top:20px;
-        border-top:1px solid #eee;
-        padding-top:9px;
-      }
-      .btn{
-        padding: 18px 40px;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ehjicobhjldomnjicohkkejcgljecncf">
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-2547771-22', 'auto');
-    ga('send', 'pageview');
-
-    </script>
   </head>
   <body>
-    <div class="container-fluid">
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="page-header">
-            <h1>Alchemize <small>Minify &amp; pretty-print your code</small></h1>
-          </div>
-          <div class="ratio-169">
-            <iframe src="https://www.youtube.com/embed/HH2lQlAEoT8" frameborder="0" allowfullscreen></iframe>
-          </div>
+    <header>
+      <h1><strong>Alchemize</strong> <small>Minify &amp; pretty-print your code</small></h1>
+      <ul>
+        <li><a href="/app/" class="primary">Launch app</a></li>
+        <li><a href="https://github.com/AshKyd/alchemize/issues">Support</a></li>
+        <li><a href="https://github.com/AshKyd/alchemize">Github</a></li>
+      </ul>
+    </header>
+    <div class="hero">
+      <div class="herocontents">
+      <div class="videohero">
+        <div class="ratio-169">
+          <iframe src="https://www.youtube.com/embed/HH2lQlAEoT8" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <h2>All the code</h2>
-          <p>Sometimes you just need to minify or pretty-print your code. Enter: Alchemize, your one app for dealing with code on the web.</p>
-          <p>Alchemize supports:</p>
-          <ul>
-            <li>Minifying &amp; pretty-printing HTML &amp; CSS</li>
-            <li>Minifying/compressing Javacript</li>
-            <li>Decompressing/pretty-printing minified Javacript</li>
-            <li>Compress &amp; pretty-print XML, JSON</li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <h2>Get Alchemize</h2>
-          <p>Install Alchemize from the <a href="https://chrome.google.com/webstore/detail/alchemize/ehjicobhjldomnjicohkkejcgljecncf">Chrome Web Store</a> for quick access or use the <a href="/app/">web version</a> from your browser.</p>
-        </div>
-      </div>
-      <div class="row">
-        <footer class="col-md-12">
-          <p>An enterprise of <a href="https://ash.ms/">Ash Kyd</a>
-            using portions of <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> among other things.
-            <a href="https://chrome.google.com/webstore/detail/alchemize/ehjicobhjldomnjicohkkejcgljecncf/support">Report a Bug</a>
-          </p>
-        </footer>
-      </div>
+      <p class="lead mt">Minimize &amp; pretty print code for the web.</p>
+      <p class="mt">Alchemize supports HTML, CSS, JS, XML &amp; JSON</p>
     </div>
+    </div>
+    <div class="testimonials">
+      <h2 class="accessibility">Testimonials</h2>
+      <figure class="mt">
+        <blockquote>“Great for checking/ untangling/ prettifying /minifying JSON and other formats”</blockquote>
+        <figcaption>— Richard H</figcaption>
+      </figure>
+      <figure class="mt">
+        <blockquote>“Very helpful, small and effective, without the bloat of a straight out editor with great error-catching capability”
+</blockquote>
+        <figcaption>— Stefan C</figcaption>
+      </figure>
+      <figure class="mt">
+        <blockquote>“I'm using this more and more now. Perfect way to make my code look nice before sharing it”</blockquote>
+        <figcaption>— Andrew L</figcaption>
+      </figure>
+    </div>
+    <footer>
+    <p>An enterprise of <a href="https://ash.ms/">Ash Kyd</a> using portions of <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> among other things.
+      Also available as a <a href="https://chrome.google.com/webstore/detail/ehjicobhjldomnjicohkkejcgljecncf">Chrome app</a>.
+    </p>
+  </footer>
   </body>
 </html>

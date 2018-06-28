@@ -1,21 +1,27 @@
 {
-    "name": "Alchemize",
-    "short_name": "Alchemize",
-    "start_url": "./?utm_source=web_app_manifest",
-    "display": "standalone",
-    "background_color": "#F8F8F8",
-    "description": "Mimify & pretty print source code with ease",
-    "icons": [{
-        "src": "icons/16.png",
-        "sizes": "16x16",
-        "type": "image/png"
-    }, {
-        "src": "icons/128.png",
-        "sizes": "128x128",
-        "type": "image/png"
-    }, {
-        "src": "icons/512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-    }]
+  "short_name": "Alchemize",
+  "name": "Alchemize",
+  "icons": [
+    {
+      "src": "icons/16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/app/",
+  "background_color": "#f8f8f8",
+  "display": "standalone",
+  "scope": "/app/",
+  "theme_color": "#6badf6",
+  ​​"orientation": "landscape-primary"
 }

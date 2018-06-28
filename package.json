@@ -7,21 +7,31 @@
     "type": "git",
     "url": "https://github.com/AshKyd/alchemize"
   },
+  "browserify": {
+    "transform": ["brfs"]
+  },
   "scripts": {
+    "start":
+      "npm run build-web && cd dist-www && python -m SimpleHTTPServer;cd ..",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-js": "browserify src/scripts/index.js>dist/index.js && browserify src/scripts/worker.js>dist/worker.js && browserify src/scripts/workerService > dist/workerService.js",
+    "copy-ace": "cp node_modules/ace-builds/src-min/ dist/ace/ -r",
+    "build-js":
+      "npm run copy-ace & browserify src/scripts/index.js>dist/index.js && browserify src/scripts/worker.js>dist/worker.js && browserify src/scripts/workerService> dist/workerService.js",
     "build-css": "lessc src/css/style.less > dist/style.css",
     "build-misc": "cp src/*.html src/*.json dist/",
-    "build-icons": "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
-    "clean": "rm -rf dist dist-www;mkdir -p dist/icons/;mkdir -p dist-www/app",
-    "build": "npm run clean; npm run build-js;wait; npm run build-css & npm run build-misc & npm run build-icons;wait",
+    "build-icons":
+      "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
+    "clean":
+      "rm -rf src/scripts/ace/;rm -rf dist dist-www;mkdir -p dist/icons/;mkdir -p dist-www/app",
+    "build":
+      "npm run clean; npm run build-js;wait; npm run build-css & npm run build-misc & npm run build-icons;wait",
     "build-web": "npm run build;cp web/* dist-www/;cp dist/* dist-www/app/ -r"
   },
   "author": "Ash Kyd <ash@kyd.com.au>",
   "license": "ISC",
   "dependencies": {
+    "ace-builds": "^1.3.3",
     "bootstrap": "^3.2.0",
-    "brace": "git+https://github.com/AshKyd/brace.git",
     "clean-css": "^2.2.16",
     "gulp-rsync": "0.0.5",
     "html-minifier": "git+https://github.com/AshKyd/html-minifier.git",
@@ -29,9 +39,10 @@
     "js-beautify": "^1.5.1",
     "pretty-data": "git+https://github.com/AshKyd/pretty-data.git",
     "sw-toolbox": "^3.4.0",
-    "uglify-js": "^2.4.15"
+    "uglify-es": "github:AshKyd/UglifyJS2#harmony"
   },
   "devDependencies": {
+    "brfs": "^2.0.0",
     "browserify": "^13.3.0",
     "less": "^2.7.2"
   }
