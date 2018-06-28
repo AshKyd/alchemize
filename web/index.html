@@ -1,111 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset='utf-8'>
     <title>Alchemize App</title>
-    <style type="text/css">
-      body{
-        max-width:800px;
-        padding-top:10px;
-      }
-      .ratio-169{
-        position:relative;
-        width:100%;
-        padding-bottom:56.25%;
-      }
-      .ratio-169 iframe{
-        position:absolute;
-        display:block;
-        left:0;
-        top:0;
-        width:100%;
-        height:100%;
-      }
-      footer{
-        margin-top:20px;
-        border-top:1px solid #eee;
-        padding-top:9px;
-      }
-      .btn{
-        padding: 18px 40px;
-      }
-
-      .hero{
-        background:black;
-        position:relative;
-        height:200px;
-        overflow: hidden;
-      }
-      .bubble{
-        position:absolute;
-        top:100%;
-        width:64px;
-        height:64px;
-        line-height: 64px;
-        text-align: center;
-        background:white;
-        animation: infinite linear 3s bubble;
-        border-radius: 100%;
-        font-weight: bold;
-      }
-      .js{
-        background:#f5b400;
-        color:black;
-        left:25%;
-        animation-delay: 1s;
-      }
-      .html{
-        background:#dc4437;
-        color:white;
-        left:75%;
-        animation-delay: 0.5s;
-      }
-
-      @keyframes bubble{
-        from{
-          transform: scale(0), translate(-3px,0);
-        }
-        25%{
-          transform: translate(3px,-75%);
-        }
-        50%{
-          opacity:1;
-          transform: translate(-3px,-150%);
-        }
-        75%{
-          opacity: 0.5;
-          transform: translate(3px,-225%);
-        }
-        to{
-          opacity:0;
-          transform: translate(-3px,-300%);
-        }
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ehjicobhjldomnjicohkkejcgljecncf">
   </head>
   <body>
-    <h1>Alchemize <small>Minify &amp; pretty-print your code</small></h1>
-    <div class="hero">
-      <p>Quickly minimize and pretty print code for the web.</p>
-
-      <p class="accessibility">Alchemize supports:</p>
+    <header>
+      <h1><strong>Alchemize</strong> <small>Minify &amp; pretty-print your code</small></h1>
       <ul>
-      <li class="bubble html">HTML</li>
-      <li class="bubble css">CSS</li>
-      <li class="bubble js">JS</li>
-      <li class="bubble xml">XML</li>
-      <li class="bubble json">JSON</li>
+        <li><a href="/app/" class="primary">Launch app</a></li>
+        <li><a href="https://github.com/AshKyd/alchemize/issues">Support</a></li>
+        <li><a href="https://github.com/AshKyd/alchemize">Github</a></li>
       </ul>
+    </header>
+    <div class="hero">
+      <div class="herocontents">
+      <div class="videohero">
+        <div class="ratio-169">
+          <iframe src="https://www.youtube.com/embed/HH2lQlAEoT8" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <p class="lead mt">Minimize &amp; pretty print code for the web.</p>
+      <p class="mt">Alchemize supports HTML, CSS, JS, XML &amp; JSON</p>
     </div>
-
-    <div class="ratio-169">
-      <iframe src="https://www.youtube.com/embed/HH2lQlAEoT8" frameborder="0" allowfullscreen></iframe>
     </div>
-    <h2>Get Alchemize</h2>
-    <p>Install Alchemize from the <a href="https://chrome.google.com/webstore/detail/alchemize/ehjicobhjldomnjicohkkejcgljecncf">Chrome Web Store</a> for quick access or use the <a href="/app/">web version</a> from your browser.</p>
+    <div class="testimonials">
+      <h2 class="accessibility">Testimonials</h2>
+      <figure class="mt">
+        <blockquote>“Great for checking/ untangling/ prettifying /minifying JSON and other formats”</blockquote>
+        <figcaption>— Richard H</figcaption>
+      </figure>
+      <figure class="mt">
+        <blockquote>“Very helpful, small and effective, without the bloat of a straight out editor with great error-catching capability”
+</blockquote>
+        <figcaption>— Stefan C</figcaption>
+      </figure>
+      <figure class="mt">
+        <blockquote>“I'm using this more and more now. Perfect way to make my code look nice before sharing it”</blockquote>
+        <figcaption>— Andrew L</figcaption>
+      </figure>
+    </div>
     <footer>
     <p>An enterprise of <a href="https://ash.ms/">Ash Kyd</a> using portions of <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> among other things.
-    <a href="https://github.com/AshKyd/alchemize/issues">Report a Bug</a>
+      Also available as a <a href="https://chrome.google.com/webstore/detail/ehjicobhjldomnjicohkkejcgljecncf">Chrome app</a>.
     </p>
   </footer>
   </body>
