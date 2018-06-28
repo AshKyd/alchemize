@@ -1,6 +1,6 @@
 {
   "name": "alchemize",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Mimify & pretty print source code with ease.",
   "main": "src/scripts/index.js",
   "repository": {
@@ -8,23 +8,20 @@
     "url": "https://github.com/AshKyd/alchemize"
   },
   "browserify": {
-    "transform": ["brfs"]
+    "transform": [
+      "brfs"
+    ]
   },
   "scripts": {
-    "start":
-      "npm run build-web && cd dist-www && python -m SimpleHTTPServer;cd ..",
+    "start": "npm run build-web && cd dist-www && python -m SimpleHTTPServer;cd ..",
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy-ace": "cp node_modules/ace-builds/src-min/ dist/ace/ -r",
-    "build-js":
-      "npm run copy-ace & browserify src/scripts/index.js>dist/index.js && browserify src/scripts/worker.js>dist/worker.js && browserify src/scripts/workerService> dist/workerService.js",
+    "build-js": "npm run copy-ace & browserify src/scripts/index.js>dist/index.js && browserify src/scripts/worker.js>dist/worker.js && browserify src/scripts/workerService> dist/workerService.js",
     "build-css": "lessc src/css/style.less > dist/style.css",
     "build-misc": "cp src/*.html src/*.json dist/",
-    "build-icons":
-      "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
-    "clean":
-      "rm -rf src/scripts/ace/;rm -rf dist dist-www;mkdir -p dist/icons/;mkdir -p dist-www/app",
-    "build":
-      "npm run clean; npm run build-js;wait; npm run build-css & npm run build-misc & npm run build-icons;wait",
+    "build-icons": "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
+    "clean": "rm -rf src/scripts/ace/;rm -rf dist dist-www;mkdir -p dist/icons/;mkdir -p dist-www/app",
+    "build": "npm run clean; npm run build-js;wait; npm run build-css & npm run build-misc & npm run build-icons;wait",
     "build-web": "npm run build;cp web/* dist-www/;cp dist/* dist-www/app/ -r"
   },
   "author": "Ash Kyd <ash@kyd.com.au>",
