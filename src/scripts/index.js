@@ -226,11 +226,6 @@ function initWorker() {
 }
 
 function postMessage(payload) {
-  // If our frame is initialised we're probably using a Chrome extension
-  if ($frame) {
-    $frame[0].contentWindow.postMessage(payload, "*");
-  }
-
   // If we've got a worker, use that! these should be mutually exclusive.
   if (worker) {
     worker.postMessage(payload);
