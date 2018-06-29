@@ -21,14 +21,12 @@ Prereqs:
 
 * Node
 * npm
-* less (npm install -g less)
-* browserify (npm install -g browserify)
 
 To install:
 
 1. Check out the repo.
 2. `npm install` the dependencies.
-3. `npm run build` will build into the dist/ folder
+3. `npm run` will build into the dist/ folder and launch a server
 
 Bugs & errata
 --------------------
