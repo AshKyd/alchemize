@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <title>Alchemize App</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ehjicobhjldomnjicohkkejcgljecncf">
+    <link rel="stylesheet" type="text/css" href="http://lazy-product-landing-page.ash.ms/module-app.css">
     <meta name="description" content="Minimize, pretty print, and inspect HTML, CSS, Javascript, JSON, or XML">
     <meta property="og:type" content="product">
     <meta property="og:image" content="https://alchemizeapp.com/og-image.png">
@@ -18,45 +17,99 @@
     <meta name="twitter:image:src" content="https://alchemizeapp.com/twitter-image.png">
   </head>
   <body>
-    <header>
-      <h1><strong>Alchemize</strong> <small>Minify &amp; pretty-print your code</small></h1>
-      <ul>
-        <li><a href="/app/" class="primary">Launch app</a></li>
-        <li><a href="https://github.com/AshKyd/alchemize/issues">Support</a></li>
-        <li><a href="https://github.com/AshKyd/alchemize">Github</a></li>
-      </ul>
-    </header>
-    <div class="hero">
-      <div class="herocontents">
-      <div class="videohero">
-        <div class="ratio-169">
-          <iframe src="https://www.youtube.com/embed/HH2lQlAEoT8" frameborder="0" allowfullscreen></iframe>
+    <div class="module-app module-system-font" style="--darkBg:#151517;--darkFg:#fff;--lightBg:#fff;--lightFg:#000;--gradient1:#3e9975;--gradient2:#119d66;--gradientFg:#fff;--gradientFg2:#ddffea;--buttonPrimaryBg:#fff;--buttonPrimaryBgActive:rgba(240,255,240,.9);--buttonPrimaryFg:#000;">
+      <header class="module-app__header">
+        <div class="inner">
+          <h1>
+          <img src="https://alchemizeapp.com/favicon.ico" alt="" />
+          Alchemize
+          </h1>
         </div>
-      </div>
-      <p class="lead mt">Minimize &amp; pretty print code for the web.</p>
-      <p class="mt">Alchemize supports HTML, CSS, JS, XML &amp; JSON</p>
+      </header>
+      <section class="module-app__section-primary padding padding-tall">
+        <div class="inner">
+          <h2>Minify & pretty-print</h2>
+          <p>Format or minify your code snippets from around the web. Format API responses, debug broken code, and learn new JS tricks from the Uglify engine.</p>
+
+          <div class="btn-group">
+            <a href="/app/" class="btn btn-primary">Launch the app</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="module-app__section-gradient-to-dark padding padding-tall">
+        <div class="inner-wide">
+          <h2 class="sr-only">Watch the video</h2>
+          <div class="module-video">
+            <iframe src="https://www.youtube.com/embed/HH2lQlAEoT8" allowfullscreen="" frameborder="0"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="module-app__section-dark padding">
+        <div class="inner">
+          <h2>Common web formats</h2>
+
+          <ul class="module-app_points">
+            <li>
+              <img style="--color:#FDDB3C" alt="" src="https://unpkg.com/simple-icons@latest/icons/javascript.svg" />
+              <p>Javascript</p>
+            </li>
+            <li>
+              <img style="--color:#4B95D4" alt="" src="https://unpkg.com/simple-icons@latest/icons/css3.svg" />
+              <p>CSS</p>
+            </li>
+            <li>
+              <img style="--color:#F06527" alt="" src="https://unpkg.com/simple-icons@latest/icons/html5.svg" />
+              <p>HTML</p>
+            </li>
+            <li>
+              <img style="--color:#E2E4EC" alt="" src="https://unpkg.com/simple-icons@latest/icons/json.svg" />
+              <p>JSON</p>
+            </li>
+            <li>
+              <img style="--color:#11A55C" alt="" src="https://unpkg.com/simple-icons@latest/icons/xcode.svg" />
+              <p>XML</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="module-app__section-light padding">
+        <h2>Word on the street</h2>
+        <div class="module-app__testimonials inner">
+          <h2 class="sr-only">Testimonials</h2>
+          <figure>
+            <blockquote>“Great for checking/ untangling/ prettifying /minifying JSON and other formats”</blockquote>
+            <figcaption>— Richard H</figcaption>
+          </figure>
+          <figure>
+            <blockquote>“Very helpful, small and effective, without the bloat of a straight out editor with great error-catching capability”
+    </blockquote>
+            <figcaption>— Stefan C</figcaption>
+          </figure>
+          <figure>
+            <blockquote>“I'm using this more and more now. Perfect way to make my code look nice before sharing it”</blockquote>
+            <figcaption>— Andrew L</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="module-app__section-primary padding padding-tall">
+        <div class="inner">
+          <h2>Try Alchemize today</h2>
+          <div class="btn-group">
+            <a href="/app/" class="btn btn-primary">Launch the app</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="module-app__section-dark padding">
+        <p>An enterprise of <a href="https://ash.ms/">Ash Kyd</a> using portions of <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> among other things.
+          <br>
+          Find the <a href="https://github.com/AshKyd/alchemize">source on github</a>. Also available as a <a href="https://chrome.google.com/webstore/detail/ehjicobhjldomnjicohkkejcgljecncf">Chrome app</a>. <br>
+        </p>
+      </footer>
     </div>
-    </div>
-    <div class="testimonials">
-      <h2 class="accessibility">Testimonials</h2>
-      <figure class="mt">
-        <blockquote>“Great for checking/ untangling/ prettifying /minifying JSON and other formats”</blockquote>
-        <figcaption>— Richard H</figcaption>
-      </figure>
-      <figure class="mt">
-        <blockquote>“Very helpful, small and effective, without the bloat of a straight out editor with great error-catching capability”
-</blockquote>
-        <figcaption>— Stefan C</figcaption>
-      </figure>
-      <figure class="mt">
-        <blockquote>“I'm using this more and more now. Perfect way to make my code look nice before sharing it”</blockquote>
-        <figcaption>— Andrew L</figcaption>
-      </figure>
-    </div>
-    <footer>
-    <p>An enterprise of <a href="https://ash.ms/">Ash Kyd</a> using portions of <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> among other things.
-      Also available as a <a href="https://chrome.google.com/webstore/detail/ehjicobhjldomnjicohkkejcgljecncf">Chrome app</a>.
-    </p>
-  </footer>
   </body>
 </html>
