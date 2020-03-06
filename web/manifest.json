@@ -1,0 +1,29 @@
+{
+  "name": "Alchemize",
+  "short_name": "Alchemize",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#6badf6",
+  "orientation": "landscape-primary",
+  "description": "Format or minify your code snippets from around the web",
+  "categories": ["devtools", "productivity"]
+  "icons": [
+    {
+      "src": "/app/icons/16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/app/icons/128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/app/icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
