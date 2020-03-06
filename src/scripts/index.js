@@ -293,6 +293,8 @@ $(document).ready(function() {
 
   document.body.classList.remove("preload");
   document.body.classList.add("loaded");
+  
+  require('./preload.js');
 });
 
 $(window).resize(function() {

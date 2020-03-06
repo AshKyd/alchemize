@@ -31,6 +31,7 @@
     "bootstrap": "^3.2.0",
     "clean-css": "^2.2.16",
     "gulp-rsync": "0.0.5",
+    "he": "^1.2.0",
     "html-minifier": "git+https://github.com/AshKyd/html-minifier.git",
     "jquery": "^2.1.1",
     "js-beautify": "^1.5.1",
@@ -42,7 +43,6 @@
     "asar": "^0.14.3",
     "brfs": "^2.0.0",
     "browserify": "^13.3.0",
-    "electron": "^2.0.3",
     "less": "^2.7.2"
   }
 }
