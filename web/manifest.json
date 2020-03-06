@@ -8,7 +8,7 @@
   "theme_color": "#6badf6",
   "orientation": "landscape-primary",
   "description": "Format or minify your code snippets from around the web",
-  "categories": ["devtools", "productivity"]
+  "categories": ["devtools", "productivity"],
   "icons": [
     {
       "src": "/app/icons/16.png",
