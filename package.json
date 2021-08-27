@@ -21,8 +21,9 @@
     "build-misc": "cp src/*.html src/*.json dist/",
     "build-icons": "convert -background none resources/icon-16.svg dist/icons/16.png & convert -background none resources/icon.svg dist/icons/128.png & convert -background none -density 512 -resize 512x resources/icon.svg dist/icons/512.png;",
     "clean": "rm -rf src/scripts/ace/;rm -rf dist dist-www;mkdir -p dist/icons/;mkdir -p dist-www/app",
-    "build": "npm run clean; npm run build-js;wait; npm run build-css & npm run build-misc & npm run build-icons;wait",
-    "build-web": "npm run build;cp web/* dist-www/;cp  -r dist/* dist-www/app/"
+    "build-app": "npm run clean; npm run build-js;wait; npm run build-css & npm run build-misc & npm run build-icons;wait",
+    "build-web": "npm run build-app;cp web/* dist-www/;cp  -r dist/* dist-www/app/",
+    "build": "npm run build-web"
   },
   "author": "Ash Kyd <ash@kyd.com.au>",
   "license": "ISC",
