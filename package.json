@@ -33,6 +33,7 @@
     "clean-css": "^2.2.23",
     "he": "^1.2.0",
     "html-minifier": "git+https://github.com/AshKyd/html-minifier.git",
+    "htmlparser": "^1.7.7",
     "jquery": "^2.2.4",
     "js-beautify": "^1.10.3",
     "pretty-data": "git+https://github.com/AshKyd/pretty-data.git",
