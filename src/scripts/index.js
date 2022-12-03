@@ -12,6 +12,7 @@ var versioning = require("./_includes/versioning");
 
 var editor;
 var before;
+var theme;
 
 // Formats we support.
 var formats = {
@@ -258,7 +259,6 @@ $(document).ready(function() {
   initWorker();
   $(window).resize();
   editor = ace.edit("editor");
-  editor.setTheme("ace/theme/chrome");
   var session = editor.getSession();
   session.setMode("ace/mode/text");
   session.setUseWrapMode(true);
@@ -287,6 +287,8 @@ $(document).ready(function() {
   $("button.action").click(performAction);
   initDrag();
 
+  initTheme();
+
   versioning();
 
   message("Drag a file or paste from the clipboard");
@@ -310,3 +312,26 @@ $(window).resize(function() {
 $(window).focus(function() {
   editor.focus();
 });
+
+// dark theme switch functions
+// apply the theme
+function applyTheme(){
+	$('body').removeClass('dark light')
+	$('body').addClass(theme)
+	editor.setTheme("ace/theme/" + (theme == 'dark' ? "tomorrow_night" : "chrome"));
+}
+// check local storage then user's preferred theme
+function initTheme(){
+  theme = localStorage.getItem('theme');
+  if (!theme){
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
+  }
+  // switch theme
+  $('#dark-theme-switch').on("click", () => {
+    theme = theme == 'dark' ? 'light' : 'dark'
+    localStorage.setItem('theme', theme);
+    applyTheme()
+  })
+  // apply default
+  applyTheme()
+}
