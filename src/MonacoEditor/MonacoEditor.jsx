@@ -103,6 +103,18 @@ export function MonacoEditor({ editorRef }) {
     );
   }, [registry.language.value, editorRef]);
 
+  // Auto-resize editor when container size changes
+  useEffect(() => {
+    if (!editorRef.current || !rootNode.current) {
+      return;
+    }
+
+    const resizeObserver = new ResizeObserver(() => editorRef.current.layout());
+    resizeObserver.observe(rootNode.current);
+
+    return () => resizeObserver.disconnect();
+  }, [editorRef, rootNode]);
+
   return (
     <div
       class="monaco-editor"
