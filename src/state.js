@@ -21,4 +21,8 @@ export function getState() {
   return { theme };
 }
 
-export const Registry = createContext({});
+export const Registry = createContext({
+  theme: {
+    value: "light",
+  },
+});

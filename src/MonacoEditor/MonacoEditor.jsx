@@ -4,45 +4,54 @@ import * as monaco from "monaco-editor";
 import { useEffect, useState } from "react";
 import { Registry } from "../state";
 
+// Initialize Monaco Environment for Vite
 self.MonacoEnvironment = {
   getWorker: function (workerId, label) {
-    const getWorkerModule = (moduleUrl, label) => {
-      return new Worker(self.MonacoEnvironment.getWorkerUrl(moduleUrl), {
-        name: label,
-        type: "module",
-      });
-    };
-
     switch (label) {
       case "json":
-        return getWorkerModule(
-          "/monaco-editor/esm/vs/language/json/json.worker?worker",
-          label
+        return new Worker(
+          new URL(
+            "monaco-editor/esm/vs/language/json/json.worker.js",
+            import.meta.url
+          ),
+          { type: "module" }
         );
       case "css":
       case "scss":
       case "less":
-        return getWorkerModule(
-          "/monaco-editor/esm/vs/language/css/css.worker?worker",
-          label
+        return new Worker(
+          new URL(
+            "monaco-editor/esm/vs/language/css/css.worker.js",
+            import.meta.url
+          ),
+          { type: "module" }
         );
       case "html":
       case "handlebars":
       case "razor":
-        return getWorkerModule(
-          "/monaco-editor/esm/vs/language/html/html.worker?worker",
-          label
+        return new Worker(
+          new URL(
+            "monaco-editor/esm/vs/language/html/html.worker.js",
+            import.meta.url
+          ),
+          { type: "module" }
         );
       case "typescript":
       case "javascript":
-        return getWorkerModule(
-          "/monaco-editor/esm/vs/language/typescript/ts.worker?worker",
-          label
+        return new Worker(
+          new URL(
+            "monaco-editor/esm/vs/language/typescript/ts.worker.js",
+            import.meta.url
+          ),
+          { type: "module" }
         );
       default:
-        return getWorkerModule(
-          "/monaco-editor/esm/vs/editor/editor.worker?worker",
-          label
+        return new Worker(
+          new URL(
+            "monaco-editor/esm/vs/editor/editor.worker.js",
+            import.meta.url
+          ),
+          { type: "module" }
         );
     }
   },
@@ -52,10 +61,6 @@ export function MonacoEditor() {
   const rootNode = useRef();
   const editorRef = useRef(null);
   const registry = useContext(Registry);
-
-  useEffect(() => {
-    console.log({ registry });
-  }, [registry]);
 
   useEffect(() => {
     if (!rootNode.current) {
