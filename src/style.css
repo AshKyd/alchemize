@@ -1,0 +1,83 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --color: #222;
+  --background: #ffffff;
+  --background-secondary: #f1f1f1;
+  --border: #c0bfc9;
+  --background-hover: #b8b7c5;
+  --highlight: #9cdac6;
+
+  color: var(--color);
+  background-color: var(--background-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+#app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+select,
+button {
+  border-radius: 4px;
+  color: var(--color);
+  background-color: var(--background);
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: all 0.2s;
+  &:hover,
+  &:focus-visible {
+    background-color: var(--background-hover);
+  }
+  &:active {
+    background-color: var(--background);
+  }
+  &:focus-visible {
+    z-index: 2 !important;
+    outline: 2px solid var(--highlight);
+    outline-offset: 2px;
+  }
+}
+
+.btn-group {
+  button {
+    position: relative;
+    z-index: 1;
+  }
+  button:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  button + button {
+    border-radius: 0 4px 4px 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color: #e8e8e8;
+    --background: #1a1a1a;
+    --background-secondary: #161616;
+    --border: #343438;
+    --background-hover: #26252b;
+  }
+}
