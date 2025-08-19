@@ -1,7 +1,8 @@
 import { useSignal } from "@preact/signals";
 import { createContext } from "preact";
 import { useEffect } from "preact/hooks";
-export function getState() {
+
+function getTheme() {
   const theme = useSignal(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
   );
@@ -18,11 +19,21 @@ export function getState() {
     };
   }, []);
 
-  return { theme };
+  return theme;
+}
+
+export function getState() {
+  return {
+    theme: getTheme(),
+    language: useSignal("text"),
+  };
 }
 
 export const Registry = createContext({
   theme: {
     value: "light",
+  },
+  language: {
+    value: "text",
   },
 });

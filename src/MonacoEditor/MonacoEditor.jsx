@@ -57,21 +57,19 @@ self.MonacoEnvironment = {
   },
 };
 
-export function MonacoEditor() {
+export function MonacoEditor({ editorRef }) {
   const rootNode = useRef();
-  const editorRef = useRef(null);
   const registry = useContext(Registry);
 
   useEffect(() => {
     if (!rootNode.current) {
       return;
     }
-    console.log("initialising editor");
 
     // Create the editor with the appropriate theme
     const editor = monaco.editor.create(rootNode.current, {
-      value: "function hello() {\n\talert('Hello world!');\n}",
-      language: "javascript",
+      value: "",
+      language: registry.language.value,
       theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
     });
 
@@ -83,7 +81,7 @@ export function MonacoEditor() {
         editorRef.current.dispose();
       }
     };
-  }, [rootNode.current]);
+  }, []);
 
   // Update editor theme when theme state changes
   useEffect(() => {
@@ -93,7 +91,17 @@ export function MonacoEditor() {
     editorRef.current.updateOptions({
       theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
     });
-  }, [registry.theme.value, editorRef.current]);
+  }, [registry.theme.value, editorRef]);
+
+  useEffect(() => {
+    if (!editorRef.current) {
+      return;
+    }
+    monaco.editor.setModelLanguage(
+      editorRef.current.getModel(),
+      registry.language.value
+    );
+  }, [registry.language.value, editorRef]);
 
   return (
     <div
