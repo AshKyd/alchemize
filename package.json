@@ -24,6 +24,7 @@
   "author": "Ash Kyd <ash@kyd.com.au>",
   "license": "ISC",
   "dependencies": {
+    "@preact/signals": "^2.2.1",
     "monaco-editor": "^0.52.2",
     "preact": "^10.22.1"
   },

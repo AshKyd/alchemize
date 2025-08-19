@@ -1,7 +1,8 @@
 import { render } from "preact";
-import { useRef } from "preact/hooks";
+import { useContext, useRef } from "preact/hooks";
 import * as monaco from "monaco-editor";
 import { useEffect, useState } from "react";
+import { Registry } from "../state";
 
 self.MonacoEnvironment = {
   getWorker: function (workerId, label) {
@@ -49,16 +50,46 @@ self.MonacoEnvironment = {
 
 export function MonacoEditor() {
   const rootNode = useRef();
+  const editorRef = useRef(null);
+  const registry = useContext(Registry);
+
+  useEffect(() => {
+    console.log({ registry });
+  }, [registry]);
+
   useEffect(() => {
     if (!rootNode.current) {
       return;
     }
+    console.log("initialising editor");
 
-    monaco.editor.create(rootNode.current, {
+    // Create the editor with the appropriate theme
+    const editor = monaco.editor.create(rootNode.current, {
       value: "function hello() {\n\talert('Hello world!');\n}",
       language: "javascript",
+      theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
     });
+
+    editorRef.current = editor;
+
+    // Cleanup function
+    return () => {
+      if (editorRef.current) {
+        editorRef.current.dispose();
+      }
+    };
   }, [rootNode.current]);
+
+  // Update editor theme when theme state changes
+  useEffect(() => {
+    if (!editorRef.current) {
+      return;
+    }
+    editorRef.current.updateOptions({
+      theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
+    });
+  }, [registry.theme.value, editorRef.current]);
+
   return (
     <div
       class="monaco-editor"
