@@ -1,8 +1,9 @@
 import { render } from "preact";
 import { useContext, useRef } from "preact/hooks";
 import * as monaco from "monaco-editor";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Registry } from "../state";
+import { getLanguageFromFilename, detectContentTypeFromContent } from "./utils";
 
 // Initialize Monaco Environment for Vite
 self.MonacoEnvironment = {
@@ -58,8 +59,21 @@ self.MonacoEnvironment = {
 };
 
 export function MonacoEditor({ editorRef }) {
-  const rootNode = useRef();
+  const rootNode = useRef(document.createElement("div"));
   const registry = useContext(Registry);
+
+  function detectLanguage(filename = "") {
+    if (filename) {
+      const language = getLanguageFromFilename(filename);
+      if (language) {
+        registry.language.value = language;
+        return;
+      }
+    }
+
+    const editorContent = editorRef.current.getValue();
+    registry.language.value = detectContentTypeFromContent(editorContent);
+  }
 
   useEffect(() => {
     if (!rootNode.current) {
@@ -93,6 +107,7 @@ export function MonacoEditor({ editorRef }) {
     });
   }, [registry.theme.value, editorRef]);
 
+  // update language when state changes
   useEffect(() => {
     if (!editorRef.current) {
       return;
@@ -113,6 +128,54 @@ export function MonacoEditor({ editorRef }) {
     resizeObserver.observe(rootNode.current);
 
     return () => resizeObserver.disconnect();
+  }, [editorRef, rootNode]);
+
+  // Log editor content when user pastes new content
+  useEffect(() => {
+    if (!editorRef.current) {
+      return;
+    }
+    editorRef.current.onDidPaste(() => setTimeout(detectLanguage, 0));
+  }, [editorRef]);
+
+  // Log filename and contents when user drops a file
+  useEffect(() => {
+    if (!editorRef.current || !rootNode.current) {
+      return;
+    }
+
+    function cancelEvents(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    const handleDrop = (e) => {
+      cancelEvents(e);
+
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        const file = files[0];
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const fileContent = event.target.result;
+          if (editorRef.current) {
+            editorRef.current.setValue(fileContent);
+            detectLanguage(file.name);
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+
+    const editorContainer = rootNode.current;
+    editorContainer.addEventListener("dragover", cancelEvents);
+    editorContainer.addEventListener("drop", handleDrop);
+
+    return () => {
+      editorContainer.removeEventListener("dragover", cancelEvents);
+      editorContainer.removeEventListener("drop", handleDrop);
+    };
   }, [editorRef, rootNode]);
 
   return (

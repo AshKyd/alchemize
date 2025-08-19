@@ -23,7 +23,7 @@ export function NavBar() {
           <option value="javascript">JavaScript</option>
           <option value="html">HTML</option>
           <option value="css">CSS</option>
-          <option value="html">XML</option>
+          <option value="xml">XML</option>
           <option value="json">JSON</option>
         </select>
         <div class="btn-group">
