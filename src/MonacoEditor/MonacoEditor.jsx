@@ -153,19 +153,17 @@ export function MonacoEditor({ editorRef }) {
       cancelEvents(e);
 
       const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        const file = files[0];
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const fileContent = event.target.result;
-          if (editorRef.current) {
-            editorRef.current.setValue(fileContent);
-            detectLanguage(file.name);
-          }
-        };
-        reader.readAsText(file);
+      if (!files.length) {
+        return;
       }
+
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        editorRef.current.setValue(event.target.result);
+        detectLanguage(file.name);
+      };
+      reader.readAsText(file);
     };
 
     const editorContainer = rootNode.current;
