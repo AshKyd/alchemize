@@ -2,8 +2,7 @@ import * as esbuild from "esbuild-wasm";
 import wasmURL from "esbuild-wasm/esbuild.wasm?url";
 
 let isInitialised = false;
-
-export async function compressJs(text) {
+async function initialiseWasm() {
   if (!isInitialised) {
     await esbuild.initialize({
       wasmURL,
@@ -11,11 +10,20 @@ export async function compressJs(text) {
     });
     isInitialised = true;
   }
+}
 
-  let result1 = await esbuild.transform(text, {});
-  return result1.code;
+export async function compressJs(text) {
+  await initialiseWasm();
+  let transformed = await esbuild.transform(text, {
+    minify: true,
+  });
+  return transformed.code;
 }
 
 export async function prettifyJs(text) {
-  return text;
+  await initialiseWasm();
+  let transformed = await esbuild.transform(text, {
+    minify: false,
+  });
+  return transformed.code;
 }

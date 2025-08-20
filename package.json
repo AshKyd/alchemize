@@ -28,6 +28,7 @@
     "esbuild-wasm": "^0.25.9",
     "monaco-editor": "^0.52.2",
     "preact": "^10.22.1",
+    "prettier": "^3.6.2",
     "workiq": "^0.0.3"
   },
   "devDependencies": {
