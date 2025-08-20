@@ -12,7 +12,7 @@ export function App() {
 
   return (
     <Registry.Provider value={appState}>
-      <NavBar />
+      <NavBar editorRef={editorRef} />
       <MonacoEditor editorRef={editorRef} />
     </Registry.Provider>
   );

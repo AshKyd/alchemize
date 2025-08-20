@@ -2,9 +2,27 @@ import { render } from "preact";
 import "./navbar.css";
 import { useContext } from "preact/hooks";
 import { Registry } from "../state";
+import workerClient from "../converters/index";
 
-export function NavBar() {
+export function NavBar({ editorRef }) {
   const registry = useContext(Registry);
+
+  function performAction(e, action) {
+    e.preventDefault();
+    const text = editorRef.current.getValue();
+
+    workerClient
+      .push(action, { language: registry.language.value, text }, [])
+      .then(({ res, error }) => {
+        if (error) {
+          alert(error);
+        }
+        if (res) {
+          console.log("setting value", JSON.stringify(res), typeof res);
+          editorRef.current.setValue(res);
+        }
+      });
+  }
   return (
     <nav class="navbar">
       <h1>Alchemize</h1>
@@ -27,8 +45,12 @@ export function NavBar() {
           <option value="json">JSON</option>
         </select>
         <div class="btn-group">
-          <button>Compress</button>
-          <button>Prettify</button>
+          <button onClick={(e) => performAction(e, "compress")}>
+            Compress
+          </button>
+          <button onClick={(e) => performAction(e, "prettify")}>
+            Prettify
+          </button>
         </div>
       </div>
     </nav>

@@ -176,11 +176,5 @@ export function MonacoEditor({ editorRef }) {
     };
   }, [editorRef, rootNode]);
 
-  return (
-    <div
-      class="monaco-editor"
-      ref={rootNode}
-      style="background:red;flex:1;"
-    ></div>
-  );
+  return <div class="monaco-editor" ref={rootNode} style="flex:1;"></div>;
 }
