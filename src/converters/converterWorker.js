@@ -1,5 +1,7 @@
 import { WorkerClient } from "workiq";
-import { compressJs, prettifyJs } from "./jsEsbuild";
+import { compressJs, prettifyJs } from "./converterJavascript";
+import { compressCss, prettifyCss } from "./converterCss";
+import { compressHtml, prettifyHtml } from "./converterHtml";
 
 function getError(message) {
   console.error(message);
@@ -8,6 +10,14 @@ function getError(message) {
 }
 
 const languages = {
+  html: {
+    compress: compressHtml,
+    prettify: prettifyHtml,
+  },
+  css: {
+    compress: compressCss,
+    prettify: prettifyCss,
+  },
   javascript: {
     compress: compressJs,
     prettify: prettifyJs,
@@ -37,9 +47,7 @@ async function compress({ language, text }) {
   if (!compressor) {
     return getError("Compressor not found for " + language);
   }
-  return compressor(text)
-    .then((res) => [{ res }])
-    .catch((e) => getError(e.message));
+  return compressor(text).then((res) => [{ res }]);
 }
 
 async function prettify({ language, text }) {

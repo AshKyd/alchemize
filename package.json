@@ -25,10 +25,21 @@
   "license": "ISC",
   "dependencies": {
     "@preact/signals": "^2.2.1",
+    "buffer": "^6.0.3",
+    "clean-css": "^5.3.3",
+    "clean-css-build": "github:AshKyd/clean-css-browserified",
     "esbuild-wasm": "^0.25.9",
+    "html-minifier-terser": "^7.2.0",
+    "https-browserify": "^1.0.0",
+    "js-beautify": "^1.15.4",
     "monaco-editor": "^0.52.2",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
     "preact": "^10.22.1",
     "prettier": "^3.6.2",
+    "stream-http": "^3.2.0",
+    "terser": "^5.43.1",
+    "util": "^0.12.5",
     "workiq": "^0.0.3"
   },
   "devDependencies": {

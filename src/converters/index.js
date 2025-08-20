@@ -1,6 +1,6 @@
 import { WorkerHost } from "workiq";
 
-const worker = new Worker(new URL("./worker.js", import.meta.url), {
+const worker = new Worker(new URL("./converterWorker.js", import.meta.url), {
   type: "module",
 });
 
