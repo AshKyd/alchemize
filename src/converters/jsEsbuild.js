@@ -1,4 +1,7 @@
 import * as esbuild from "esbuild-wasm";
+import * as prettier from "prettier/standalone";
+import prettierBabel from "prettier/plugins/babel";
+import prettierEstree from "prettier/plugins/estree";
 import wasmURL from "esbuild-wasm/esbuild.wasm?url";
 
 let isInitialised = false;
@@ -21,9 +24,9 @@ export async function compressJs(text) {
 }
 
 export async function prettifyJs(text) {
-  await initialiseWasm();
-  let transformed = await esbuild.transform(text, {
-    minify: false,
+  let formatted = await prettier.format(text, {
+    parser: "babel",
+    plugins: [prettierBabel, prettierEstree],
   });
-  return transformed.code;
+  return formatted;
 }

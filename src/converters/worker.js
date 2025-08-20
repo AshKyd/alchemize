@@ -2,6 +2,8 @@ import { WorkerClient } from "workiq";
 import { compressJs, prettifyJs } from "./jsEsbuild";
 
 function getError(message) {
+  console.error(message);
+  console.trace();
   return [{ error: message }];
 }
 
