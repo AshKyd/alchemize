@@ -11,7 +11,11 @@ const monacoPreloads = fs
     (file) =>
       file.includes("MonacoEditor-") || file.includes("converterWorker-")
   )
-  .map((file) => `<link rel="modulepreload" href="assets/${file}" />`)
+  .map((file) =>
+    file.includes(".css")
+      ? `<link rel="preload" as="style" href="assets/${file}" />`
+      : `<link rel="modulepreload" href="assets/${file}" />`
+  )
   .join("\n    ");
 
 const newHtml = html.replace("</head>", monacoPreloads + "\n  </head>");
