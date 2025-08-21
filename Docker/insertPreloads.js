@@ -13,7 +13,7 @@ const monacoPreloads = fs
   )
   .map((file) =>
     file.includes(".css")
-      ? `<link rel="preload" as="style" href="assets/${file}" />`
+      ? `<link rel="preload" as="style" href="assets/${file}" crossorigin />`
       : `<link rel="modulepreload" href="assets/${file}" />`
   )
   .join("\n    ");
