@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
-    "build-app": "vite build",
+    "build-app": "vite build && node Docker/insertPreloads.js",
     "build-web": "npm run build-app;cp web/* dist-www/;cp  -r dist/* dist-www/app/",
     "build": "npm run build-web"
   },

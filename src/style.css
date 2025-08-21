@@ -4,14 +4,14 @@
   font-weight: 400;
 
   --color: #222;
-  --background: #ffffff;
+  --background: #fffffe;
   --background-secondary: #f1f1f1;
   --border: #c0bfc9;
-  --background-hover: #e8e8e8;
-  --highlight: #9cdac6;
+  --background-hover: #f1f1f1;
+  --highlight: #26cf99;
 
   color: var(--color);
-  background-color: var(--background-color);
+  background-color: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -44,7 +44,7 @@ button {
   cursor: pointer;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  transition: all 0.2s;
+  transition: all 0.1s;
   &:hover,
   &:focus-visible {
     background-color: var(--background-hover);
@@ -76,7 +76,7 @@ button {
 @media (prefers-color-scheme: dark) {
   :root {
     --color: #e8e8e8;
-    --background: #1a1a1a;
+    --background: #1e1e1e;
     --background-secondary: #161616;
     --border: #343438;
     --background-hover: #26252b;
