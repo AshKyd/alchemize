@@ -71,7 +71,7 @@ export function MonacoEditor({ editorRef }) {
       }
     }
 
-    const editorContent = editorRef.current.getValue();
+    const editorContent = registry.registry.registry.value.getValue();
     registry.language.value = detectContentTypeFromContent(editorContent);
   }
 
@@ -87,44 +87,46 @@ export function MonacoEditor({ editorRef }) {
       theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
     });
 
-    editorRef.current = editor;
+    registry.editorRef.value = editor;
 
     // Cleanup function
     return () => {
-      if (editorRef.current) {
-        editorRef.current.dispose();
+      if (registry.editorRef.value) {
+        registry.editorRef.value.dispose();
       }
     };
   }, []);
 
   // Update editor theme when theme state changes
   useEffect(() => {
-    if (!editorRef.current) {
+    if (!registry.editorRef.value) {
       return;
     }
-    editorRef.current.updateOptions({
+    registry.editorRef.value.updateOptions({
       theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
     });
   }, [registry.theme.value, editorRef]);
 
   // update language when state changes
   useEffect(() => {
-    if (!editorRef.current) {
+    if (!registry.editorRef.value) {
       return;
     }
     monaco.editor.setModelLanguage(
-      editorRef.current.getModel(),
+      registry.editorRef.value.getModel(),
       registry.language.value
     );
   }, [registry.language.value, editorRef]);
 
   // Auto-resize editor when container size changes
   useEffect(() => {
-    if (!editorRef.current || !rootNode.current) {
+    if (!registry.editorRef.value || !rootNode.current) {
       return;
     }
 
-    const resizeObserver = new ResizeObserver(() => editorRef.current.layout());
+    const resizeObserver = new ResizeObserver(() =>
+      registry.editorRef.value.layout()
+    );
     resizeObserver.observe(rootNode.current);
 
     return () => resizeObserver.disconnect();
@@ -132,15 +134,15 @@ export function MonacoEditor({ editorRef }) {
 
   // Log editor content when user pastes new content
   useEffect(() => {
-    if (!editorRef.current) {
+    if (!registry.editorRef.value) {
       return;
     }
-    editorRef.current.onDidPaste(() => setTimeout(detectLanguage, 0));
+    registry.editorRef.value.onDidPaste(() => setTimeout(detectLanguage, 0));
   }, [editorRef]);
 
   // Log filename and contents when user drops a file
   useEffect(() => {
-    if (!editorRef.current || !rootNode.current) {
+    if (!registry.editorRef.value || !rootNode.current) {
       return;
     }
 
@@ -160,7 +162,7 @@ export function MonacoEditor({ editorRef }) {
       const file = files[0];
       const reader = new FileReader();
       reader.onload = (event) => {
-        editorRef.current.setValue(event.target.result);
+        registry.editorRef.value.setValue(event.target.result);
         detectLanguage(file.name);
       };
       reader.readAsText(file);

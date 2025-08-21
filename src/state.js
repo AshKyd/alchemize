@@ -26,6 +26,7 @@ export function getState() {
   return {
     theme: getTheme(),
     language: useSignal("text"),
+    editorRef: useSignal({}),
   };
 }
 
@@ -35,5 +36,8 @@ export const Registry = createContext({
   },
   language: {
     value: "text",
+  },
+  editorRef: {
+    value: {},
   },
 });

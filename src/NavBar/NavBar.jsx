@@ -4,12 +4,13 @@ import { useContext } from "preact/hooks";
 import { Registry } from "../state";
 import workerClient from "../converters/index";
 
-export function NavBar({ editorRef }) {
+export function NavBar({}) {
   const registry = useContext(Registry);
 
   function performAction(e, action) {
     e.preventDefault();
-    const text = editorRef.current.getValue();
+    const editorRef = registry.editorRef.value;
+    const text = editorRef.getValue();
 
     workerClient
       .push(action, { language: registry.language.value, text }, [])
@@ -18,10 +19,10 @@ export function NavBar({ editorRef }) {
           alert(error);
         }
         if (res) {
-          editorRef.current.setValue(res);
+          editorRef.setValue(res);
           // Put the cursor at the very start of the editor
-          editorRef.current.setPosition({ lineNumber: 1, column: 1 });
-          editorRef.current.revealPosition({ lineNumber: 1, column: 1 });
+          editorRef.setPosition({ lineNumber: 1, column: 1 });
+          editorRef.revealPosition({ lineNumber: 1, column: 1 });
         }
       });
   }

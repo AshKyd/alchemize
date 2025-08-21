@@ -12,7 +12,6 @@ let MonacoEditorComponent = null;
 
 export function App() {
   const appState = getState();
-  const editorRef = useRef();
   const [loading, setLoading] = useState(true);
 
   // Handle lazy loading state
@@ -26,8 +25,8 @@ export function App() {
 
   return (
     <Registry.Provider value={appState}>
-      <NavBar editorRef={editorRef} />
-      {loading ? <Spinner /> : <MonacoEditorComponent editorRef={editorRef} />}
+      <NavBar />
+      {loading ? <Spinner /> : <MonacoEditorComponent />}
     </Registry.Provider>
   );
 }
