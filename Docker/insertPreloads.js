@@ -1,10 +1,12 @@
 import fs from "fs";
 import path from "path";
+import * as url from "url";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-const htmlPath = path.resolve(import.meta.dirname, "../dist/index.html");
+const htmlPath = path.resolve(__dirname, "../dist/index.html");
 const html = fs.readFileSync(htmlPath, "utf8");
 const monacoPreloads = fs
-  .readdirSync(path.resolve(import.meta.dirname, "../dist/assets/"))
+  .readdirSync(path.resolve(__dirname, "../dist/assets/"))
   .filter(
     (file) =>
       file.includes("MonacoEditor-") || file.includes("converterWorker-")
