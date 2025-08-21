@@ -5,7 +5,7 @@ export function getLanguageFromFilename(filename) {
   }
   switch (extension) {
     case "js":
-    case "ts":
+    case "mjs":
       return "javascript";
     case "css":
       return "css";
@@ -13,14 +13,26 @@ export function getLanguageFromFilename(filename) {
     case "rss":
     case "atom":
     case "opml":
+    case "svg":
+    case "xhtml":
+    case "kml":
+    case "gpx":
+    case "plist":
+    case "manifest":
       return "xml";
     case "html":
     case "htm":
+    case "xhtml":
       return "html";
     case "json":
       return "json";
-    default:
+    case "txt":
+    case "text":
+    case "md":
+    case "log":
       return "text";
+    default:
+      return null;
   }
 }
 

@@ -2,6 +2,7 @@ import { WorkerClient } from "workiq";
 import { compressJs, prettifyJs } from "./converterJavascript";
 import { compressCss, prettifyCss } from "./converterCss";
 import { compressHtml, prettifyHtml } from "./converterHtml";
+import { compressXml, prettifyXml } from "./converterXml";
 
 function getError(message) {
   console.error(message);
@@ -10,6 +11,10 @@ function getError(message) {
 }
 
 const languages = {
+  xml: {
+    compress: compressXml,
+    prettify: prettifyXml,
+  },
   html: {
     compress: compressHtml,
     prettify: prettifyHtml,

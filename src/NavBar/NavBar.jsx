@@ -18,8 +18,10 @@ export function NavBar({ editorRef }) {
           alert(error);
         }
         if (res) {
-          console.log("setting value", JSON.stringify(res), typeof res);
           editorRef.current.setValue(res);
+          // Put the cursor at the very start of the editor
+          editorRef.current.setPosition({ lineNumber: 1, column: 1 });
+          editorRef.current.revealPosition({ lineNumber: 1, column: 1 });
         }
       });
   }
@@ -32,7 +34,6 @@ export function NavBar({ editorRef }) {
           style="min-width:10em;"
           onChange={(e) => {
             e.preventDefault();
-            console.log("changing to", e.target.value);
             registry.language.value = e.target.value;
           }}
           value={registry.language.value}
