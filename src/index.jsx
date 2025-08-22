@@ -1,18 +1,18 @@
-import { createContext, render, h } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import { render, h } from "preact";
+import { useState, useEffect, useRef } from "preact/hooks";
 
 import "./style.css";
 import { NavBar } from "./NavBar/NavBar";
 import { getState, Registry } from "./state";
 import { Spinner } from "./Spinner/Spinner";
-import { useRef } from "react";
 import { detectLanguage } from "./actions";
 
 // We'll dynamically import MonacoEditor when needed
 let MonacoEditorComponent = null;
 
 export function App() {
-  const appState = getState();
+  const registry = getState();
+  /** @type {import('preact').RefObject<HTMLDivElement>} */
   const rootNode = useRef();
   const [loading, setLoading] = useState(true);
   const [dropping, setDropping] = useState(false);
@@ -81,20 +81,20 @@ export function App() {
       current.removeEventListener("dragleave", dragLeave);
       current.removeEventListener("drop", handleDrop);
     };
-  }, [appState.editorRef, rootNode]);
+  }, [registry.editorRef, rootNode]);
 
   // wait until the editor is available before setting text
   useEffect(() => {
     const { text, fileName } = droppedValue;
-    if (!fileName || !appState.editorRef.value) {
+    if (!fileName || !registry.editorRef.value) {
       return;
     }
-    appState.editorRef.value.setValue(text);
-    detectLanguage(appState, fileName);
-  }, [droppedValue, appState.editorRef]);
+    registry.editorRef.value.setValue(text);
+    detectLanguage(registry, fileName);
+  }, [droppedValue, registry.editorRef]);
 
   return (
-    <Registry.Provider value={appState}>
+    <Registry.Provider value={registry}>
       <div
         class={`app app--${dropping ? "is-dropping" : "not-dropping"}`}
         ref={rootNode}

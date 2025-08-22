@@ -26,7 +26,8 @@ export function getState() {
   return {
     theme: getTheme(),
     language: useSignal("text"),
-    editorRef: useSignal({}),
+    /** @type {import("@preact/signals").Signal<import("monaco-editor").editor.IStandaloneCodeEditor>} */
+    editorRef: useSignal(),
   };
 }
 
