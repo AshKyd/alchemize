@@ -14,22 +14,25 @@ export function NavBar({}) {
     <nav class="navbar">
       <h1>Alchemize</h1>
       <div class="navbar__tools">
-        <select
-          class="form-control formats"
-          style="min-width:10em;"
-          onChange={(e) => {
-            e.preventDefault();
-            registry.language.value = e.target.value;
-          }}
-          value={registry.language.value}
-        >
-          <option value="text">Text</option>
-          <option value="javascript">JavaScript</option>
-          <option value="html">HTML</option>
-          <option value="css">CSS</option>
-          <option value="xml">XML</option>
-          <option value="json">JSON</option>
-        </select>
+        <label>
+          <span class="sr-only">Format</span>
+          <select
+            class="form-control formats"
+            style="min-width:10em;"
+            onChange={(e) => {
+              e.preventDefault();
+              registry.language.value = e.target.value;
+            }}
+            value={registry.language.value}
+          >
+            <option value="text">Text</option>
+            <option value="javascript">JavaScript</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="xml">XML</option>
+            <option value="json">JSON</option>
+          </select>
+        </label>
         <div class="btn-group">
           <button
             disabled={isDisabled}
