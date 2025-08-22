@@ -5,8 +5,12 @@
   justify-content: space-between;
   align-items: center;
   background: var(--background-secondary);
-  border-bottom: 1px solid var(--border);
   padding: 4px 16px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  @media (prefers-color-scheme: dark) {
+    box-shadow: none;
+    border-bottom: 1px solid var(--border);
+  }
   h1 {
     font-size: inherit;
     font-weight: bold;
