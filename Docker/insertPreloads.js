@@ -11,11 +11,16 @@ const monacoPreloads = fs
     (file) =>
       file.includes("MonacoEditor-") || file.includes("converterWorker-")
   )
-  .map((file) =>
-    file.includes(".css")
-      ? `<link rel="preload" as="style" href="assets/${file}" crossorigin />`
-      : `<link rel="modulepreload" href="assets/${file}" />`
-  )
+  .map((file) => {
+    if (file.includes(".css")) {
+      return `<link rel="preload" as="style" href="assets/${file}" crossorigin />`;
+    }
+    if (file.includes("Worker")) {
+      return `<link rel="preload" as="worker" href="assets/${file}" />`;
+    }
+
+    return `<link rel="modulepreload" href="assets/${file}" />`;
+  })
   .join("\n    ");
 
 const newHtml = html.replace("</head>", monacoPreloads + "\n  </head>");
