@@ -4,7 +4,9 @@ import * as monaco from "monaco-editor";
 import { useEffect } from "react";
 import { Registry } from "../state";
 import { initCommands } from "./monacoCommands";
+import { initThemes } from "./themes";
 import "./monacoEditor.css";
+import { detectLanguage } from "../actions";
 
 // Initialize Monaco Environment for Vite
 self.MonacoEnvironment = {
@@ -68,11 +70,15 @@ export function MonacoEditor({ editorRef }) {
       return;
     }
 
-    // Create the editor with the appropriate theme
+    // Initialize themes
+    initThemes();
+
+    // Create the editor with the GithubDark theme
     const editor = monaco.editor.create(rootNode.current, {
       value: "",
       language: registry.language.value,
-      theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
+      theme:
+        registry.theme.value === "dark" ? "AlchemizeDark" : "AlchemizeLight",
     });
 
     registry.editorRef.value = editor;
@@ -87,16 +93,6 @@ export function MonacoEditor({ editorRef }) {
     };
   }, []);
 
-  // Update editor theme when theme state changes
-  useEffect(() => {
-    if (!registry.editorRef.value) {
-      return;
-    }
-    registry.editorRef.value.updateOptions({
-      theme: registry.theme.value === "dark" ? "vs-dark" : "vs",
-    });
-  }, [registry.theme.value, editorRef]);
-
   // update language when state changes
   useEffect(() => {
     if (!registry.editorRef.value) {
@@ -107,6 +103,13 @@ export function MonacoEditor({ editorRef }) {
       registry.language.value
     );
   }, [registry.language.value, editorRef]);
+
+  useEffect(() => {
+    registry.editorRef.value.updateOptions({
+      theme:
+        registry.theme.value === "dark" ? "AlchemizeDark" : "AlchemizeLight",
+    });
+  }, [registry.theme.value]);
 
   // Auto-resize editor when container size changes
   useEffect(() => {
@@ -127,7 +130,9 @@ export function MonacoEditor({ editorRef }) {
     if (!registry.editorRef.value) {
       return;
     }
-    registry.editorRef.value.onDidPaste(() => setTimeout(detectLanguage, 0));
+    registry.editorRef.value.onDidPaste(() =>
+      setTimeout(() => detectLanguage(registry, ""), 0)
+    );
   }, [editorRef]);
 
   // reset savings and update editor length when the editor content changes

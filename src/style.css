@@ -7,8 +7,8 @@
   --background: #fffffe;
   --background-secondary: #f1f1f1;
   --border: #c0bfc9;
-  --background-hover: #f1f1f1;
-  --highlight: #26cf99;
+  --background-hover: Highlight;
+  --highlight: SelectedItem;
 
   color: var(--color);
   background-color: var(--background);
@@ -56,7 +56,8 @@ button {
     background-color: var(--background-hover);
   }
   &:active {
-    background-color: var(--background);
+    background-color: Highlight;
+    color: HighlightText;
   }
   &:focus-visible {
     z-index: 2 !important;
@@ -82,9 +83,9 @@ button {
 @media (prefers-color-scheme: dark) {
   :root {
     --color: #e8e8e8;
-    --background: #1e1e1e;
-    --background-secondary: #161616;
+    --background: #111112ff;
+    --background-secondary: #0b0c0d;
     --border: #23232b;
-    --background-hover: #26252b;
+    --background-hover: #24292e;
   }
 }
