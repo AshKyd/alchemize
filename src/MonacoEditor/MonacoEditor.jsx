@@ -71,7 +71,7 @@ export function MonacoEditor({ editorRef }) {
       }
     }
 
-    const editorContent = registry.registry.registry.value.getValue();
+    const editorContent = registry.editorRef.value.getValue();
     registry.language.value = detectContentTypeFromContent(editorContent);
   }
 
