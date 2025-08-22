@@ -4,6 +4,7 @@ import * as monaco from "monaco-editor";
 import { useEffect } from "react";
 import { Registry } from "../state";
 import { getLanguageFromFilename, detectContentTypeFromContent } from "./utils";
+import { initCommands } from "./monacoCommands";
 
 // Initialize Monaco Environment for Vite
 self.MonacoEnvironment = {
@@ -88,6 +89,8 @@ export function MonacoEditor({ editorRef }) {
     });
 
     registry.editorRef.value = editor;
+
+    initCommands(registry);
 
     // Cleanup function
     return () => {
