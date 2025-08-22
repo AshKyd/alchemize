@@ -20,6 +20,9 @@ export function App() {
 
   // Handle lazy loading state
   useEffect(() => {
+    if (MonacoEditorComponent) {
+      return setLoading(false);
+    }
     // Dynamically import MonacoEditor
     import("./MonacoEditor/MonacoEditor").then((module) => {
       MonacoEditorComponent = module.MonacoEditor;
