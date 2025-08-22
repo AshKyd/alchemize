@@ -4,6 +4,7 @@ import * as monaco from "monaco-editor";
 import { useEffect } from "react";
 import { Registry } from "../state";
 import { initCommands } from "./monacoCommands";
+import "./monacoEditor.css";
 
 // Initialize Monaco Environment for Vite
 self.MonacoEnvironment = {
@@ -129,5 +130,25 @@ export function MonacoEditor({ editorRef }) {
     registry.editorRef.value.onDidPaste(() => setTimeout(detectLanguage, 0));
   }, [editorRef]);
 
-  return <div class="monaco-editor" ref={rootNode} style="flex:1;"></div>;
+  // reset savings and update editor length when the editor content changes
+  useEffect(() => {
+    if (!registry.editorRef.value) {
+      return;
+    }
+
+    const disposable = registry.editorRef.value.onDidChangeModelContent(() => {
+      registry.savings.value = Infinity;
+      registry.editorLength.value = registry.editorRef.value
+        .getModel()
+        .getValueLength();
+    });
+
+    return () => disposable.dispose();
+  }, [editorRef]);
+
+  return (
+    <div class="monaco-editor">
+      <div class="monaco-editor__floater" ref={rootNode} style="flex:1;"></div>
+    </div>
+  );
 }

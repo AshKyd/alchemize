@@ -6,6 +6,7 @@ import { NavBar } from "./NavBar/NavBar";
 import { getState, Registry } from "./state";
 import { Spinner } from "./Spinner/Spinner";
 import { detectLanguage } from "./actions";
+import { Footer } from "./Footer/Footer";
 
 // We'll dynamically import MonacoEditor when needed
 let MonacoEditorComponent = null;
@@ -108,6 +109,7 @@ export function App() {
         ) : (
           <MonacoEditorComponent isDropping={dropping} />
         )}
+        <Footer isLoading={loading} />
       </div>
     </Registry.Provider>
   );

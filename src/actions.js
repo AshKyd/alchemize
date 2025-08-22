@@ -122,7 +122,8 @@ export function detectLanguage(registry, filename = "") {
   registry.language.value = detectContentTypeFromContent(editorContent);
 }
 
-export function performAction(editorRef, action = "", language = "") {
+export function performAction(registry, action = "", language = "") {
+  const editorRef = registry.editorRef.value;
   const text = editorRef.getValue();
 
   workerClient
@@ -140,6 +141,10 @@ export function performAction(editorRef, action = "", language = "") {
       }
       if (res) {
         editorRef.setValue(res);
+
+        // How much of a change did this make?
+        registry.savings.value = text.length - res.length;
+
         // Put the cursor at the very start of the editor
         editorRef.setPosition({ lineNumber: 1, column: 1 });
         editorRef.revealPosition({ lineNumber: 1, column: 1 });

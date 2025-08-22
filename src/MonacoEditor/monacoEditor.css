@@ -1,0 +1,12 @@
+.monaco-editor {
+  flex: 1;
+  position: relative;
+}
+
+.monaco-editor__floater {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

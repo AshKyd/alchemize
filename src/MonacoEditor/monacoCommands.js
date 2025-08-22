@@ -6,11 +6,11 @@ export function initCommands(registry) {
   editorRef.addAction({
     id: "compress",
     label: "Compress code",
-    run: () => performAction(editorRef, "compress", registry.language.value),
+    run: () => performAction(registry, "compress", registry.language.value),
   });
   editorRef.addAction({
     id: "prettify",
     label: "Prettify code",
-    run: () => performAction(editorRef, "prettify", registry.language.value),
+    run: () => performAction(registry, "prettify", registry.language.value),
   });
 }

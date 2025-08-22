@@ -1,0 +1,14 @@
+.footer {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border);
+  padding: 8px 16px;
+  h1 {
+    font-size: inherit;
+    font-weight: bold;
+  }
+}

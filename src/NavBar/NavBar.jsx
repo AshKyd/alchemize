@@ -31,11 +31,7 @@ export function NavBar({}) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              performAction(
-                registry.editorRef.value,
-                "compress",
-                registry.language.value
-              );
+              performAction(registry, "compress", registry.language.value);
             }}
           >
             Compress
@@ -43,11 +39,7 @@ export function NavBar({}) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              performAction(
-                registry.editorRef.value,
-                "prettify",
-                registry.language.value
-              );
+              performAction(registry, "prettify", registry.language.value);
             }}
           >
             Prettify
