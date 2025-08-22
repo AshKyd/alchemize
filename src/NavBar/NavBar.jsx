@@ -7,6 +7,9 @@ import { performAction } from "../actions";
 export function NavBar({}) {
   const registry = useContext(Registry);
 
+  const isDisabled =
+    registry.editorLength.value === 0 || registry.language.value === "text";
+
   return (
     <nav class="navbar">
       <h1>Alchemize</h1>
@@ -14,6 +17,7 @@ export function NavBar({}) {
         <select
           class="form-control formats"
           style="min-width:10em;"
+          disabled={isDisabled}
           onChange={(e) => {
             e.preventDefault();
             registry.language.value = e.target.value;
@@ -29,6 +33,7 @@ export function NavBar({}) {
         </select>
         <div class="btn-group">
           <button
+            disabled={isDisabled}
             onClick={(e) => {
               e.preventDefault();
               performAction(registry, "compress", registry.language.value);
@@ -37,6 +42,7 @@ export function NavBar({}) {
             Compress
           </button>
           <button
+            disabled={isDisabled}
             onClick={(e) => {
               e.preventDefault();
               performAction(registry, "prettify", registry.language.value);

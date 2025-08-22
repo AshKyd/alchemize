@@ -47,17 +47,24 @@ button {
   background-color: var(--background);
   padding: 8px 16px;
   border: 1px solid var(--border);
-  cursor: pointer;
   outline: 2px solid transparent;
   outline-offset: 2px;
   transition: all 0.1s;
-  &:hover,
-  &:focus-visible {
-    background-color: var(--background-hover);
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
-  &:active {
-    background-color: Highlight;
-    color: HighlightText;
+  &:not(:disabled) {
+    cursor: pointer;
+    &:hover,
+    &:focus-visible {
+      background-color: var(--background-hover);
+    }
+    &:active {
+      background-color: Highlight;
+      color: HighlightText;
+    }
   }
   &:focus-visible {
     z-index: 2 !important;
