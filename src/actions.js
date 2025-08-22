@@ -125,7 +125,7 @@ export function detectLanguage(registry, filename = "") {
 export function performAction(registry, action = "", language = "") {
   const editorRef = registry.editorRef.value;
   const text = editorRef.getValue();
-
+  registry.isWorking.value = true;
   workerClient
     .push(
       action,
@@ -137,7 +137,8 @@ export function performAction(registry, action = "", language = "") {
     )
     .then(({ res, error }) => {
       if (error) {
-        alert(error);
+        registry.isWorking.value = false;
+        registry.errorMessage.value = error;
       }
       if (res) {
         editorRef.setValue(res);
@@ -148,6 +149,8 @@ export function performAction(registry, action = "", language = "") {
         // Put the cursor at the very start of the editor
         editorRef.setPosition({ lineNumber: 1, column: 1 });
         editorRef.revealPosition({ lineNumber: 1, column: 1 });
+        registry.isWorking.value = false;
+        registry.errorMessage.value = "";
       }
     });
 }

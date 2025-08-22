@@ -38,6 +38,8 @@ function getTheme() {
  * @property {import("@preact/signals").Signal<import("monaco-editor").editor.IStandaloneCodeEditor>} editorRef
  * @property {import("@preact/signals").Signal<number>} savings
  * @property {import("@preact/signals").Signal<number>} editorLength
+ * @property {import("@preact/signals").Signal<boolean>} isWorking
+ * @property {import("@preact/signals").Signal<string>} errorMessage
  */
 
 /**
@@ -51,6 +53,8 @@ export function getState() {
     editorRef: useSignal(),
     savings: useSignal(Infinity),
     editorLength: useSignal(0),
+    isWorking: useSignal(false),
+    errorMessage: useSignal(""),
   };
 }
 

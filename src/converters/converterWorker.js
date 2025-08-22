@@ -52,7 +52,9 @@ async function compress({ language, text }) {
   if (!compressor) {
     return getError("Compressor not found for " + language);
   }
-  return compressor(text).then((res) => [{ res }]);
+  return compressor(text)
+    .then((res) => [{ res }])
+    .catch((e) => getError(e.message));
 }
 
 async function prettify({ language, text }) {

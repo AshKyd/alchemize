@@ -146,6 +146,7 @@ export function MonacoEditor({ editorRef }) {
       registry.editorLength.value = registry.editorRef.value
         .getModel()
         .getValueLength();
+      registry.errorMessage.value = "";
     });
 
     return () => disposable.dispose();

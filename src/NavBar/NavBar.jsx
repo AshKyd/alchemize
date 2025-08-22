@@ -17,7 +17,6 @@ export function NavBar({}) {
         <select
           class="form-control formats"
           style="min-width:10em;"
-          disabled={isDisabled}
           onChange={(e) => {
             e.preventDefault();
             registry.language.value = e.target.value;

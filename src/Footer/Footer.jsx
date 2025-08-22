@@ -8,6 +8,8 @@ export function Footer({ isLoading }) {
   const savings = registry.savings.value;
   const format = languages[registry.language.value];
   const editorLength = registry.editorLength.value;
+  const isWorking = registry.isWorking.value;
+  const errorMessage = registry.errorMessage.value;
 
   // Format the size in KB with up to two decimal places
   const sizeInKB = (editorLength / 1024).toFixed(2);
@@ -16,6 +18,8 @@ export function Footer({ isLoading }) {
   let statusMessage;
   if (isLoading) {
     statusMessage = "Loading editor…";
+  } else if (errorMessage) {
+    statusMessage = `Error: ${errorMessage.slice(0, 47)}`;
   } else if (savings !== Infinity) {
     // Message when savings !== Infinity
     // Format the savings with up to two decimal places
@@ -33,6 +37,7 @@ export function Footer({ isLoading }) {
   return (
     <footer class="footer" aria-live="polite">
       <div class="footer__status">{statusMessage}</div>
+      <div>{isWorking && <progress />}</div>
     </footer>
   );
 }
