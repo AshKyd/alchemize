@@ -3,7 +3,6 @@ import { useContext, useRef } from "preact/hooks";
 import * as monaco from "monaco-editor";
 import { useEffect } from "react";
 import { Registry } from "../state";
-import { getLanguageFromFilename, detectContentTypeFromContent } from "./utils";
 import { initCommands } from "./monacoCommands";
 
 // Initialize Monaco Environment for Vite
@@ -62,19 +61,6 @@ self.MonacoEnvironment = {
 export function MonacoEditor({ editorRef }) {
   const rootNode = useRef(document.createElement("div"));
   const registry = useContext(Registry);
-
-  function detectLanguage(filename = "") {
-    if (filename) {
-      const language = getLanguageFromFilename(filename);
-      if (language) {
-        registry.language.value = language;
-        return;
-      }
-    }
-
-    const editorContent = registry.editorRef.value.getValue();
-    registry.language.value = detectContentTypeFromContent(editorContent);
-  }
 
   useEffect(() => {
     if (!rootNode.current) {
@@ -142,44 +128,6 @@ export function MonacoEditor({ editorRef }) {
     }
     registry.editorRef.value.onDidPaste(() => setTimeout(detectLanguage, 0));
   }, [editorRef]);
-
-  // Log filename and contents when user drops a file
-  useEffect(() => {
-    if (!registry.editorRef.value || !rootNode.current) {
-      return;
-    }
-
-    function cancelEvents(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    const handleDrop = (e) => {
-      cancelEvents(e);
-
-      const files = e.dataTransfer.files;
-      if (!files.length) {
-        return;
-      }
-
-      const file = files[0];
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        registry.editorRef.value.setValue(event.target.result);
-        detectLanguage(file.name);
-      };
-      reader.readAsText(file);
-    };
-
-    const editorContainer = rootNode.current;
-    editorContainer.addEventListener("dragover", cancelEvents);
-    editorContainer.addEventListener("drop", handleDrop);
-
-    return () => {
-      editorContainer.removeEventListener("dragover", cancelEvents);
-      editorContainer.removeEventListener("drop", handleDrop);
-    };
-  }, [editorRef, rootNode]);
 
   return <div class="monaco-editor" ref={rootNode} style="flex:1;"></div>;
 }

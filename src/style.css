@@ -27,10 +27,16 @@
 body {
   margin: 0;
 }
-#app {
+.app {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+}
+.app--is-dropping {
+  opacity: 0.5;
+}
+.monaco-editor--is-dropping {
+  pointer-events: none;
 }
 
 input,

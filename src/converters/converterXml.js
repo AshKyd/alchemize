@@ -3,7 +3,8 @@ import prettierXml from "@prettier/plugin-xml";
 import prettydata from "pretty-data";
 
 export async function compressXml(text) {
-  return prettydata.pd.xmlmin(text);
+  // prettify first, because prettier has xmlWhitespaceSensitivity:'ignore'
+  return prettydata.pd.xmlmin(await prettifyXml(text));
 }
 
 export async function prettifyXml(text) {
