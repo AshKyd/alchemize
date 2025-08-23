@@ -4,6 +4,10 @@ try {
   console.error(e);
 }
 
+try {
+  localStorage.hasUsedLegacyApp = 1;
+} catch (e) {}
+
 // Globals and general ugliness.
 window.$ = require("jquery");
 window.jQuery = $;
@@ -21,43 +25,43 @@ var formats = {
     filename: /\.txt$/,
     parser: "text",
     mode: "ace/mode/text",
-    actions: []
+    actions: [],
   },
   JavaScript: {
     name: "JavaScript",
     filename: /\.js$/,
     parser: "js",
     mode: "ace/mode/javascript",
-    actions: ["compress", "prettify"]
+    actions: ["compress", "prettify"],
   },
   HTML: {
     name: "HTML",
     filename: /\.html?$/,
     parser: "html",
     mode: "ace/mode/html",
-    actions: ["compress", "prettify"]
+    actions: ["compress", "prettify"],
   },
   CSS: {
     name: "CSS",
     filename: /\.js$/,
     parser: "css",
     mode: "ace/mode/css",
-    actions: ["compress", "prettify"]
+    actions: ["compress", "prettify"],
   },
   XML: {
     name: "XML",
     filename: /\.xml$/,
     parser: "xml",
     mode: "ace/mode/xml",
-    actions: ["compress", "prettify"]
+    actions: ["compress", "prettify"],
   },
   JSON: {
     name: "JSON",
     filename: /\.json$/,
     parser: "json",
     mode: "ace/mode/json",
-    actions: ["compress", "prettify"]
-  }
+    actions: ["compress", "prettify"],
+  },
 };
 
 function formatChange(format) {
@@ -67,7 +71,7 @@ function formatChange(format) {
 function changeFormat(format) {
   $(".formats").val(format);
   var $actions = $(".action").attr("disabled", "disabled");
-  formats[format].actions.forEach(function(action) {
+  formats[format].actions.forEach(function (action) {
     $actions.filter("." + action).removeAttr("disabled");
   });
   editor.getSession().setMode(formats[format].mode);
@@ -81,7 +85,7 @@ function performAction() {
   postMessage({
     lang: formats[format].parser,
     direction: action,
-    input: input
+    input: input,
   });
   return false;
 }
@@ -89,15 +93,15 @@ function performAction() {
 function initDrag() {
   var holder = document.getElementsByTagName("body")[0];
 
-  holder.ondragover = function() {
+  holder.ondragover = function () {
     this.className = "hover";
     return false;
   };
-  holder.ondragend = function() {
+  holder.ondragend = function () {
     this.className = "";
     return false;
   };
-  holder.ondrop = function(e) {
+  holder.ondrop = function (e) {
     this.className = "";
     e.preventDefault();
 
@@ -109,7 +113,7 @@ function initDrag() {
 function dragSingle(file) {
   var reader = new FileReader();
 
-  reader.onload = function(event) {
+  reader.onload = function (event) {
     // Uglify occasionally inserts \x01 for some reason.
     var isBinary = /[\x00\x02-\x08\x0E-\x1F]/.test(event.target.result);
     if (isBinary) {
@@ -149,54 +153,54 @@ function detectContentTypeFromContent(content) {
     // Matches an initial /* comment */ and subsequent function def.
     {
       test: /^\/\*(.|\n)+function\s*\(/,
-      type: "JavaScript"
+      type: "JavaScript",
     },
     {
       test: /<html(.*)?>/,
-      type: "HTML"
+      type: "HTML",
     },
     {
       test: /<(div|span|ul|li|head|script)(.*)?>/,
-      type: "HTML"
+      type: "HTML",
     },
     {
       // Matches a partial arrow function
       test: /\)\s?=>/,
-      type: "JavaScript"
+      type: "JavaScript",
     },
     {
       test: /^\s*{/,
-      type: "JSON"
+      type: "JSON",
     },
     {
       test: /console\.log/,
-      type: "JavaScript"
+      type: "JavaScript",
     },
     {
       test: /function\s*\(/,
-      type: "JavaScript"
+      type: "JavaScript",
     },
     {
       test: /@import/,
-      type: "CSS"
+      type: "CSS",
     },
     // Matches something like "foo {", a syntax you'd likely
     // not find elsewhere
     // False positive on var a=\n//foo\n{a:b}
     {
       test: /\w+\s*\{/,
-      type: "CSS"
+      type: "CSS",
     },
     // Matches assignment, excluding something like the CSS syntax [foo=bar]
     // False positive on something like @import("/foo?a=b")
     {
       test: /\s[^'"\[]+\=/,
-      type: "JavaScript"
+      type: "JavaScript",
     },
     {
       test: /^\s*</,
-      type: "XML"
-    }
+      type: "XML",
+    },
   ];
 
   for (var i = 0; i < round1.length; i++) {
@@ -255,7 +259,7 @@ function onmessage(event) {
   }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   initWorker();
   $(window).resize();
   editor = ace.edit("editor");
@@ -266,14 +270,14 @@ $(document).ready(function() {
   editor.renderer.setPrintMarginColumn(80);
   editor.focus();
 
-  editor.on("paste", function(content) {
+  editor.on("paste", function (content) {
     // Break out so the editor can actually have the new value set.
-    setTimeout(function() {
+    setTimeout(function () {
       detectContentType("", editor.getValue());
     });
   });
 
-  editor.on("change", function(content) {
+  editor.on("change", function (content) {
     $(".status.format").text($(".formats").val());
     message(bytesToDisplay(editor.getValue().length, true));
   });
@@ -295,11 +299,11 @@ $(document).ready(function() {
 
   document.body.classList.remove("preload");
   document.body.classList.add("loaded");
-  
-  require('./preload.js');
+
+  require("./preload.js");
 });
 
-$(window).resize(function() {
+$(window).resize(function () {
   var bodyHeight = $(window).innerHeight();
   $("body").height(bodyHeight);
   $("#editor").height(
@@ -309,29 +313,33 @@ $(window).resize(function() {
   );
 });
 
-$(window).focus(function() {
+$(window).focus(function () {
   editor.focus();
 });
 
 // dark theme switch functions
 // apply the theme
-function applyTheme(){
-	$('body').removeClass('dark light')
-	$('body').addClass(theme)
-	editor.setTheme("ace/theme/" + (theme == 'dark' ? "tomorrow_night" : "chrome"));
+function applyTheme() {
+  $("body").removeClass("dark light");
+  $("body").addClass(theme);
+  editor.setTheme(
+    "ace/theme/" + (theme == "dark" ? "tomorrow_night" : "chrome")
+  );
 }
 // check local storage then user's preferred theme
-function initTheme(){
-  theme = localStorage.getItem('theme');
-  if (!theme){
-    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
+function initTheme() {
+  theme = localStorage.getItem("theme");
+  if (!theme) {
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   }
   // switch theme
-  $('#dark-theme-switch').on("click", () => {
-    theme = theme == 'dark' ? 'light' : 'dark'
-    localStorage.setItem('theme', theme);
-    applyTheme()
-  })
+  $("#dark-theme-switch").on("click", () => {
+    theme = theme == "dark" ? "light" : "dark";
+    localStorage.setItem("theme", theme);
+    applyTheme();
+  });
   // apply default
-  applyTheme()
+  applyTheme();
 }
