@@ -7,6 +7,7 @@ import { getState, Registry } from "./state";
 import { Spinner } from "./Spinner/Spinner";
 import { detectLanguage } from "./actions";
 import { Footer } from "./Footer/Footer";
+import { getHighlightColours } from "./highlightColours";
 
 // We'll dynamically import MonacoEditor when needed
 let MonacoEditorComponent = null;
@@ -18,6 +19,14 @@ export function App() {
   const [loading, setLoading] = useState(true);
   const [dropping, setDropping] = useState(false);
   const [droppedValue, setDroppedValue] = useState({ text: "", fileName: "" });
+
+  // set calculated css variables
+  useEffect(() => {
+    const colours = getHighlightColours();
+    Object.entries(colours).forEach(([colour, value]) => {
+      document.documentElement.style.setProperty(`--${colour}`, value);
+    });
+  }, []);
 
   // Handle lazy loading state
   useEffect(() => {

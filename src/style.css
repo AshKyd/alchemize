@@ -3,14 +3,15 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --color: #222;
+  --text: #222;
   --background: #fffffe;
   --background-secondary: #f1f1f1;
   --border: #c0bfc9;
-  --background-hover: Highlight;
+  --background-hover: SelectedItem;
   --highlight: SelectedItem;
+  --linkColour: var(--highlightDarkest);
 
-  color: var(--color);
+  color: var(--text);
   background-color: var(--background);
 
   font-synthesis: none;
@@ -42,34 +43,49 @@ body {
 input,
 select,
 button {
-  border-radius: 4px;
-  color: var(--color);
-  background-color: var(--background);
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  transition: all 0.1s;
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  &:not(:disabled) {
-    cursor: pointer;
-    &:hover,
-    &:focus-visible {
-      background-color: var(--background-hover);
-    }
-    &:active {
-      background-color: Highlight;
-      color: HighlightText;
-    }
-  }
-  &:focus-visible {
-    z-index: 2 !important;
-    outline: 2px solid var(--highlight);
+  &:not(.reset) {
+    border-radius: 4px;
+    color: var(--text);
+    background-color: var(--background);
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    outline: 2px solid transparent;
     outline-offset: 2px;
+    transition: all 0.1s;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    &:not(:disabled) {
+      cursor: pointer;
+      &:hover,
+      &:focus-visible {
+        background-color: var(--background-hover);
+      }
+      &:active {
+        background-color: SelectedItem;
+        color: SelectedItemText;
+      }
+    }
+    &:focus-visible {
+      z-index: 2 !important;
+      outline: 2px solid var(--highlight);
+      outline-offset: 2px;
+    }
+  }
+}
+
+input,
+select,
+button {
+  &.reset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    background-color: transparent;
   }
 }
 
@@ -96,12 +112,25 @@ button {
   overflow: hidden;
 }
 
+a:not(.bespoke) {
+  color: var(--linkColour);
+  &:hover,
+  &:focus {
+    color: white;
+  }
+  &:active {
+    color: var(--linkColour);
+    opacity: 0.8;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --color: #e8e8e8;
+    --text: #e8e8e8;
     --background: #111112ff;
     --background-secondary: #0b0c0d;
     --border: #23232b;
     --background-hover: #24292e;
+    --linkColour: var(--highlightLight);
   }
 }
