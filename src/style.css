@@ -139,13 +139,18 @@ button {
 
 a:not(.bespoke) {
   color: var(--linkColour);
+  border-radius: 4px;
   &:hover,
   &:focus {
-    color: white;
+    color: var(--text);
   }
   &:active {
     color: var(--linkColour);
     opacity: 0.8;
+  }
+  &:focus-visible {
+    outline: 2px solid var(--highlight);
+    outline-offset: 2px;
   }
 }
 

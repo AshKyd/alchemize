@@ -6,6 +6,8 @@
   align-items: center;
   background: var(--background-secondary);
   padding: 4px 16px;
+  position: relative;
+  z-index: 100;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   flex-wrap: wrap;
   @media (prefers-color-scheme: dark) {
@@ -16,7 +18,12 @@
     font-size: inherit;
     font-weight: bold;
     button {
+      border-radius: 4px;
       cursor: pointer;
+      &:focus-visible {
+        outline: 2px solid var(--highlight);
+        outline-offset: 2px;
+      }
     }
   }
 }
