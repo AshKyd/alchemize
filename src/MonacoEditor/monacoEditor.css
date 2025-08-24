@@ -1,6 +1,7 @@
 .monaco-editor {
   flex: 1;
   position: relative;
+  outline: none !important;
 }
 
 .monaco-editor__floater {

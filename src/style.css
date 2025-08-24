@@ -41,6 +41,7 @@ body {
 }
 
 input,
+.select,
 select,
 button {
   &:not(.reset) {
@@ -52,6 +53,7 @@ button {
     outline: 2px solid transparent;
     outline-offset: 2px;
     transition: all 0.1s;
+    position: relative;
 
     &:disabled {
       opacity: 0.5;
@@ -76,6 +78,29 @@ button {
   }
 }
 
+.select:not(.reset) {
+  padding: 0;
+  display: inline-flex;
+  select {
+    -webkit-appearance: none;
+    padding: 8px 16px;
+    background: transparent !important;
+    color: inherit;
+    border: none;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: calc(50% - 3px);
+    width: 10px;
+    height: 6px;
+    background: var(--text);
+    opacity: 0.5;
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  }
+}
+
 input,
 select,
 button {
@@ -94,10 +119,10 @@ button {
     position: relative;
     z-index: 1;
   }
-  button:first-child {
+  button:not(.reset):first-child {
     border-radius: 4px 0 0 4px;
   }
-  button + button {
+  button:not(.reset) + button:not(.reset) {
     border-radius: 0 4px 4px 0;
     margin-left: -1px;
   }
