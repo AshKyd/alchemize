@@ -20,7 +20,5 @@ export function getHighlightColours() {
     highlightLightest: style.getPropertyValue(`--highlightLightest`),
   };
 
-  console.log({ highlightColours });
-
   return highlightColours;
 }
