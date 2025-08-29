@@ -18,7 +18,7 @@ export async function initThemes() {
     colors: {
       "editor.foreground": "#f6f8fa",
       "editor.background": "#111112ff",
-      "editor.selectionBackground": highlightDarkest,
+      "editor.selectionBackground": highlightDark,
       "editor.inactiveSelectionBackground": "#444d56",
       "editor.lineHighlightBackground": "#24292e",
       "editorCursor.foreground": "#ffffff",

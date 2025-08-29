@@ -3,12 +3,18 @@
   line-height: 1.5;
   font-weight: 400;
 
+  --highlight: #109d59;
+  --highlightDark: #0a332e;
+  --highlightDarkest: #111f1f;
+  --highlightLight: #6ae3a8;
+  --highlightLightest: #bbf0d6;
+
   --text: #222;
   --background: #fffffe;
   --background-secondary: #f1f1f1;
   --border: #c0bfc9;
-  --background-hover: SelectedItem;
-  --highlight: SelectedItem;
+  --background-hover: var(--highlightLightest);
+  --background-active: var(--highlightLight);
   --linkColour: var(--highlightDarkest);
 
   color: var(--text);
@@ -19,6 +25,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e8e8e8;
+    --background: #111112ff;
+    --background-secondary: #0b0c0d;
+    --border: #23232b;
+    --background-hover: var(--highlightDarkest);
+    --background-active: var(--highlightDark);
+    --linkColour: var(--highlightLight);
+  }
 }
 
 * {
@@ -66,8 +84,7 @@ button {
         background-color: var(--background-hover);
       }
       &:active {
-        background-color: SelectedItem;
-        color: SelectedItemText;
+        background-color: var(--background-active);
       }
     }
     &:focus-visible {
@@ -151,16 +168,5 @@ a:not(.bespoke) {
   &:focus-visible {
     outline: 2px solid var(--highlight);
     outline-offset: 2px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #e8e8e8;
-    --background: #111112ff;
-    --background-secondary: #0b0c0d;
-    --border: #23232b;
-    --background-hover: #24292e;
-    --linkColour: var(--highlightLight);
   }
 }

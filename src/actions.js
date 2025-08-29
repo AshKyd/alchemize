@@ -140,7 +140,7 @@ export function performAction(registry, action = "", language = "") {
         registry.isWorking.value = false;
         registry.errorMessage.value = error;
       }
-      if (res) {
+      if (typeof res === "string") {
         editorRef.setValue(res);
 
         // How much of a change did this make?

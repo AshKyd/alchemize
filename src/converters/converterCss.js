@@ -3,7 +3,8 @@ import prettierPostcss from "prettier/plugins/postcss";
 import { minify } from "csso";
 
 export async function compressCss(text) {
-  return minify(text).css;
+  const ugly = minify(text).css;
+  return ugly;
 }
 
 export async function prettifyCss(text) {
