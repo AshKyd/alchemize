@@ -3,11 +3,11 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --highlight: #109d59;
-  --highlightDark: #0a332e;
-  --highlightDarkest: #111f1f;
-  --highlightLight: #6ae3a8;
-  --highlightLightest: #bbf0d6;
+  --highlight: #32c799;
+  --highlightDark: #307560;
+  --highlightDarkest: #24463c;
+  --highlightLight: #7cdcbf;
+  --highlightLightest: #c7ece1;
 
   --text: #222;
   --background: #fffffe;
@@ -15,7 +15,7 @@
   --border: #c0bfc9;
   --background-hover: var(--highlightLightest);
   --background-active: var(--highlightLight);
-  --linkColour: var(--highlightDarkest);
+  --linkColour: var(--highlightDark);
 
   color: var(--text);
   background-color: var(--background);
