@@ -79,6 +79,7 @@ export function MonacoEditor({ editorRef }) {
       language: registry.language.value,
       theme:
         registry.theme.value === "dark" ? "AlchemizeDark" : "AlchemizeLight",
+      unusualLineTerminators: "auto",
     });
 
     registry.editorRef.value = editor;
