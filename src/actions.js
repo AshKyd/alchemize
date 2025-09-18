@@ -51,6 +51,14 @@ export function detectContentTypeFromContent(content) {
       test: /^<?xml\s/,
       type: "xml",
     },
+    {
+      test: /^\s*{/,
+      type: "json",
+    },
+    {
+      test: /^\s*\[/,
+      type: "json",
+    },
     // Matches an initial /* comment */ and subsequent function def.
     {
       test: /^\/\*(.|\n)+function\s*\(/,
@@ -68,14 +76,6 @@ export function detectContentTypeFromContent(content) {
       // Matches a partial arrow function
       test: /\)\s?=>/,
       type: "javascript",
-    },
-    {
-      test: /^\s*{/,
-      type: "json",
-    },
-    {
-      test: /^\s*\[/,
-      type: "json",
     },
     {
       test: /console\.log/,
