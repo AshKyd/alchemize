@@ -74,6 +74,10 @@ export function detectContentTypeFromContent(content) {
       type: "json",
     },
     {
+      test: /^\s*\[/,
+      type: "json",
+    },
+    {
       test: /console\.log/,
       type: "javascript",
     },
