@@ -9,6 +9,8 @@ RUN npm run build
 
 
 FROM nginx:1-alpine
+# Install brotli module for nginx
+RUN apk add --no-cache nginx-mod-http-brotli
 RUN rm -rf /etc/nginx/conf.d/default.conf
 COPY docker/default.conf /etc/nginx/conf.d/default.conf
 COPY docker/nginx.conf /etc/nginx/nginx.conf

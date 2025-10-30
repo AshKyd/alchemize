@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
-    "build-app": "VITE_COPYRIGHT_YEAR=$(date +%Y) vite build && node docker/insertPreloads.js && brotli dist/assets/* -k",
+    "build-app": "VITE_COPYRIGHT_YEAR=$(date +%Y) vite build && node docker/insertPreloads.js && brotli dist/assets/* -kv",
     "build-web": "rm -rf dist-www;mkdir dist-www;npm run build-app;cp web/* dist-www/;cp -r dist dist-www/app",
     "build": "npm run build-app"
   },
