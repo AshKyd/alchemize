@@ -1,7 +1,7 @@
 {
   "name": "alchemize",
   "displayName": "Alchemize",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "Minify & pretty print source code with ease.",
   "main": "src/scripts/index.js",
   "type": "module",
