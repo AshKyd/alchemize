@@ -26,7 +26,7 @@ export default function About({ packages, onClose }) {
     >
       <div class="about">
         <div class="about__header about__content">
-          <img class="about__icon" src="/favicon.svg" alt="" />
+          <img class="about__icon" src="/app/favicon.svg" alt="" />
 
           <h2 class="about__heading">
             <span class="about__name">{packageJson.displayName}</span>{" "}

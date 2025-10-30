@@ -37,7 +37,7 @@ export default function Welcome({}) {
     >
       <div class="welcome">
         <div class="welcome__header welcome__content">
-          <img class="welcome__icon" src="/favicon.svg" alt="" />
+          <img class="welcome__icon" src="/app/favicon.svg" alt="" />
 
           <h2 class="welcome__heading">
             <span class="welcome__name">{packageJson.displayName}</span>{" "}
