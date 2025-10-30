@@ -44,11 +44,11 @@ export function detectContentTypeFromContent(content) {
       type: "xml",
     },
     {
-      test: /^<svg\s/,
-      type: "xml",
+      test: /^<!DOCTYPE html>/,
+      type: "html",
     },
     {
-      test: /^<?xml\s/,
+      test: /^<svg\s/,
       type: "xml",
     },
     {

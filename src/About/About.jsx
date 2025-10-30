@@ -40,7 +40,9 @@ export default function About({ packages, onClose }) {
                 &copy;
                 {import.meta.env.VITE_COPYRIGHT_YEAR ||
                   new Date().getFullYear()}{" "}
-                <a href={packageJson.author.url}>{packageJson.author.name}</a>
+                <a href={packageJson.author.url} target="_blank">
+                  {packageJson.author.name}
+                </a>
                 .{" "}
               </span>
             )}
@@ -49,6 +51,7 @@ export default function About({ packages, onClose }) {
                 Distributed under the{" "}
                 <a
                   href={`https://spdx.org/licenses/${packageJson.license}.html`}
+                  target="_blank"
                 >
                   {packageJson.license} license
                 </a>
@@ -59,12 +62,16 @@ export default function About({ packages, onClose }) {
           <ul class="about__links">
             {repositoryUrl && (
               <li>
-                <a href={repositoryUrl}>Source code</a>
+                <a href={repositoryUrl} target="_blank">
+                  Source code
+                </a>
               </li>
             )}
             {packageJson.bugs?.url && (
               <li>
-                <a href={packageJson.bugs.url}>Report a bug</a>
+                <a href={packageJson.bugs.url} target="_blank">
+                  Report a bug
+                </a>
               </li>
             )}
             {packageJson.bugs?.email && (
@@ -92,7 +99,9 @@ export default function About({ packages, onClose }) {
                 <tr>
                   <td>
                     {packageJson.homepage ? (
-                      <a href={packageJson.homepage}>{packageJson.name}</a>
+                      <a href={packageJson.homepage} target="_blank">
+                        {packageJson.name}
+                      </a>
                     ) : (
                       packageJson.name
                     )}

@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "module": "system",
+    "allowJs": true,
+    "noEmit": true
+  },
+  "include": ["src/**/*"]
+}

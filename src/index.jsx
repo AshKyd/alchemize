@@ -7,6 +7,7 @@ import { getState, Registry } from "./state";
 import { Spinner } from "./Spinner/Spinner";
 import { detectLanguage } from "./actions";
 import { Footer } from "./Footer/Footer";
+import Welcome from "./Welcome/Welcome";
 
 // We'll dynamically import MonacoEditor when needed
 let MonacoEditorComponent = null;
@@ -99,6 +100,7 @@ export function App() {
 
   return (
     <Registry.Provider value={registry}>
+      <Welcome />
       <div
         class={`app app--${dropping ? "is-dropping" : "not-dropping"}`}
         ref={rootNode}
