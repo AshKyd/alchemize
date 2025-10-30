@@ -12,7 +12,7 @@
   animation: fadein 0.5s;
   min-height: 25rem;
   &::backdrop {
-    animation: fadein 0.5s;
+    animation: fadein-modal 0.5s;
     background: linear-gradient(#888888ee), var(--highlight);
     @media (prefers-color-scheme: dark) {
       background: linear-gradient(#000000e8), var(--highlight);
@@ -76,5 +76,14 @@ button.modal__close {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadein-modal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
   }
 }
