@@ -26,6 +26,14 @@
       }
     }
   }
+
+  button svg {
+    height: 8px;
+    width: 16px;
+    height: 16px;
+    translate: 0 -4px;
+    margin: 0 -6px -8px;
+  }
 }
 
 .navbar__tools {

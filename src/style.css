@@ -140,8 +140,11 @@ button {
     border-radius: 4px 0 0 4px;
   }
   button:not(.reset) + button:not(.reset) {
-    border-radius: 0 4px 4px 0;
+    border-radius: 0;
     margin-left: -1px;
+  }
+  button:not(.reset) + button:not(.reset):last-child {
+    border-radius: 0 4px 4px 0;
   }
 }
 
