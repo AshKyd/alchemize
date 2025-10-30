@@ -5,7 +5,7 @@ COPY package*.json ./
 RUN npm ci && apk add --no-cache brotli
 # Copy source code after dependencies
 COPY . .
-RUN npm run build
+RUN npm run build-web
 
 
 FROM alpine:3
