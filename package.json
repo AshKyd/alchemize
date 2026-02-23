@@ -19,7 +19,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "build-app": "VITE_COPYRIGHT_YEAR=$(date +%Y) vite build && node docker/insertPreloads.js",
-    "build-web": "rm -rf dist-www;mkdir dist-www;npm run build-app;cp web/* dist-www/;cp -r dist dist-www/app;find dist-www -type f -exec brotli --best --verbose --keep {} \\;",
+    "build-web": "rm -rf dist-www;mkdir dist-www;npm run build-app;cp -r web/* dist-www/;cp -r dist dist-www/app;find dist-www -type f -exec brotli --best --verbose --keep {} \\;",
     "build": "npm run build-app"
   },
   "author": {

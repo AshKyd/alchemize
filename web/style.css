@@ -1,0 +1,384 @@
+/* 
+  Alchemize Landing Page Styles
+  Sleek, modern, and compelling design using provided CSS variables.
+*/
+
+:root {
+  --font-main:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --section-spacing: 100px;
+  --container-width: 1000px;
+
+  /* Colors */
+  --darkBg: #151517;
+  --darkFg: #fff;
+  --lightBg: #fff;
+  --lightFg: #000;
+  --gradient1: #3e9975;
+  --gradient2: #119d66;
+  --gradientFg: #fff;
+  --gradientFg2: #ddffea;
+  --buttonPrimaryBg: #fff;
+  --buttonPrimaryBgActive: rgba(240, 255, 240, 0.9);
+  --buttonPrimaryFg: #000;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes magicFlame {
+  0%,
+  100% {
+    filter: drop-shadow(0 1px 2px var(--text))
+      drop-shadow(0 -1px 2px var(--text)) drop-shadow(0 0 6px var(--text));
+  }
+  33% {
+    filter: drop-shadow(-1px 1px 3px var(--text))
+      drop-shadow(1px -1px 3px var(--text)) drop-shadow(0 0 8px var(--text));
+  }
+  66% {
+    filter: drop-shadow(1px 1px 4px var(--text))
+      drop-shadow(-1px -1px 4px var(--text)) drop-shadow(0 0 7px var(--text));
+  }
+}
+
+@keyframes pulsateFill {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  line-height: 1.6;
+  background-color: var(--darkBg);
+  color: var(--darkFg);
+  overflow-x: hidden;
+}
+
+.inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+p {
+  font-size: 1.35rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  max-width: 650px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Header */
+.module-app__header {
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--darkBg);
+  color: var(--darkFg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.module-app__header h1 {
+  color: #fff;
+}
+
+.module-app__header h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+}
+
+.module-app__header img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Sections */
+section {
+  padding: var(--section-spacing) 0;
+  position: relative;
+}
+
+.padding-tall {
+  padding: 140px 0;
+}
+
+.module-app__section-primary {
+  background: linear-gradient(135deg, var(--gradient1), var(--gradient2));
+  color: var(--gradientFg);
+}
+
+.module-app__section-dark {
+  background-color: var(--darkBg);
+  color: var(--darkFg);
+}
+
+.module-app__section-light {
+  background-color: var(--lightBg);
+  color: var(--lightFg);
+}
+
+/* Buttons */
+.btn-group {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary {
+  background-color: var(--buttonPrimaryBg);
+  color: var(--buttonPrimaryFg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  background-color: var(--buttonPrimaryBgActive);
+}
+
+/* Points List */
+.module-app_points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  list-style: none;
+  margin-top: 3rem;
+}
+
+.module-app_points li {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: var(--transition-smooth);
+}
+
+.icon-magic {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Applying filter here so the mask inside doesn't clip it */
+  animation: magicFlame 3s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  transition: var(--transition-smooth);
+}
+
+.icon-magic-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: pulsateFill 4s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.icon-magic-inner svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+
+.section-title {
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.module-app_points p {
+  margin: 0 auto;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Testimonials */
+.module-app__testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.module-app__testimonials figure {
+  padding: 2.5rem;
+  background: #f8f9fa;
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition-smooth);
+}
+
+.module-app__testimonials figure:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+blockquote {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+figcaption {
+  font-weight: 600;
+  color: var(--gradient2);
+}
+
+/* Footer */
+footer {
+  padding: 6rem 0;
+  text-align: center;
+  background-color: var(--darkBg);
+  color: var(--darkFg);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 1rem;
+  position: relative;
+}
+
+footer p {
+  margin: 0 auto;
+}
+
+footer a {
+  color: inherit;
+  font-weight: 600;
+}
+
+/* Hero Image */
+.module-app__section-primary img {
+  border-radius: 24px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+  margin-top: 60px;
+  transition: var(--transition-smooth);
+  animation:
+    fadeInUp 1s ease-out 0.4s both,
+    float 6s ease-in-out infinite;
+}
+
+.module-app__section-primary img:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 2.2rem;
+  }
+  .padding-tall {
+    padding: 80px 0;
+  }
+  .module-app__testimonials figure {
+    padding: 1.5rem;
+  }
+}
+
+/* Utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* GitHub Corner */
+.github-corner {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.github-corner:hover {
+  transform: scale(1.05);
+}
+
+.github-corner img {
+  width: 149px;
+  height: 149px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .github-corner {
+    display: none;
+  }
+}
