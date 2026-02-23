@@ -1,0 +1,19 @@
+services:
+  web:
+    container_name: alchemizeapp.com
+    build: .
+    restart: always
+    volumes:
+      - ./data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.alchemize.rule=Host(`alchemizeapp.com`)
+      - traefik.http.routers.alchemize.entrypoints=websecure
+      - traefik.http.routers.alchemize.tls.certresolver=le
+      - traefik.http.services.alchemize.loadbalancer.server.port=80
+      - traefik.docker.network=traefik_default
+    networks:
+      - traefik_default
+networks:
+  traefik_default:
+    external: true

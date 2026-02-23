@@ -16,6 +16,11 @@ COPY docker/default.conf /etc/nginx/conf.d/default.conf
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY --from=0 /usr/src/app/dist-www /usr/share/nginx/html
 
+# Setup data directory for logs
+RUN mkdir -p /data && \
+    chown -R nginx:nginx /data && \
+    chmod -R 755 /data
+
 # Expose port and start nginx
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
